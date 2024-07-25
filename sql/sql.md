@@ -1,4 +1,4 @@
-![img_88.png](images/img_88.png)
+![img_88.png](../images/img_88.png)
 
 Auteur : Paterne G. G. Formateur en développement web : PHP/ Symfony & Rust
 
@@ -244,7 +244,7 @@ VALUES
 
 Tableau des utilisateurs :
 
-![img_21.png](images/img_21.png)
+![img_21.png](../images/img_21.png)
 
 ### Sélection de données
 
@@ -255,7 +255,7 @@ SELECT * FROM utilisateurs;
 ```
 Cette commande récupère toutes les colonnes et toutes les lignes de la table `utilisateurs`.
 
-![img_21.png](images/img_21.png)
+![img_21.png](../images/img_21.png)
 
 ### Mise à jour de données
 
@@ -270,7 +270,7 @@ WHERE nom = 'Alice Dupont';
 
 Cette commande met à jour la colonne `age` de la table `utilisateurs` pour l'utilisateur dont le nom est `Alice Dupont` et lui attribue la valeur `31`.
 
-![img_22.png](images/img_22.png)
+![img_22.png](../images/img_22.png)
 
 ### Suppression de données
 
@@ -280,7 +280,7 @@ Pour supprimer des données d'une table, utilisez la commande suivante :
 DELETE FROM utilisateurs WHERE nom = 'Alice Dupont';
 ```
 
-![img_23.png](images/img_23.png)
+![img_23.png](../images/img_23.png)
 
 - La commande `DELETE` est utilisée pour supprimer des enregistrements spécifiques d'une table.
 - Il est essentiel de bien définir la condition `WHERE` pour éviter de supprimer des enregistrements non désirés.
@@ -296,7 +296,7 @@ ALTER TABLE utilisateurs ADD COLUMN telephone VARCHAR(15);
 
 Après l'exécution de la commande SQL, la structure de la table utilisateurs serait mise à jour pour inclure la nouvelle colonne telephone :
 
-![img_24.png](images/img_24.png)
+![img_24.png](../images/img_24.png)
 
 Explication de cette commande :
 
@@ -313,7 +313,7 @@ UPDATE utilisateurs SET telephone = '0123456789' WHERE nom = 'Alice Dupont';
 UPDATE utilisateurs SET telephone = '0987654321' WHERE nom = 'Bob Martin';
 UPDATE utilisateurs SET telephone = '0123456789' WHERE nom = 'Claire Dubois';
 ```
-![img_27.png](images/img_27.png)
+![img_27.png](../images/img_27.png)
 
 ### Suppression de colonnes
 
@@ -330,11 +330,11 @@ La commande SQL `ALTER TABLE utilisateurs DROP COLUMN telephone;` permet de supp
 
 Exemple Pratique
 Supposons que nous ayons la table utilisateurs avec les enregistrements suivants avant la modification :
-![img_25.png](images/img_25.png)
+![img_25.png](../images/img_25.png)
 
 Après l'exécution de la commande SQL, la structure de la table utilisateurs serait mise à jour pour supprimer la colonne telephone :
 
-![img_26.png](images/img_26.png)
+![img_26.png](../images/img_26.png)
 
 ### Troncature de table
 
@@ -346,11 +346,11 @@ TRUNCATE TABLE utilisateurs;
 
 La table utilisateurs contien les enregistrements suivants avant l'exécution de la commande :
 
-![img_25.png](images/img_25.png)
+![img_25.png](../images/img_25.png)
 
 Après l'exécution de la commande SQL, la table utilisateurs serait vide :
 
-![img_28.png](images/img_28.png)
+![img_28.png](../images/img_28.png)
 
 - La commande `TRUNCATE TABLE` est utilisée pour supprimer rapidement tous les enregistrements d'une table.
 - Contrairement à la commande `DELETE`, `TRUNCATE TABLE` ne génère pas de journaux pour chaque ligne supprimée, ce qui la rend plus rapide pour les grandes tables.
@@ -394,7 +394,7 @@ Explication de la Commande
 - `WHERE age > 30` : Ajoute une condition pour sélectionner uniquement les enregistrements où la valeur de la colonne `age` est supérieure à `30`.
 
 Le résultat de cette commande serait les enregistrements de la table utilisateurs où l'âge est supérieur à 30.
-![img_29.png](images/img_29.png)
+![img_29.png](../images/img_29.png)
 
 Explication de cette commande :
 
@@ -416,7 +416,7 @@ SELECT * FROM utilisateurs ORDER BY age DESC;
 
 La commande `SQL SELECT * FROM utilisateurs ORDER BY age DESC;` permet de sélectionner et d'afficher tous les enregistrements de la table `utilisateurs` en les triant par ordre décroissant de la colonne `age`.
 
-![img_30.png](images/img_30.png)
+![img_30.png](../images/img_30.png)
 
 Explication de cette commande :
 
@@ -499,7 +499,7 @@ VALUES
 ```
 
 Résultat de la Table utilisateurs
-![img_25.png](images/img_25.png)
+![img_25.png](../images/img_25.png)
 
 Insertion de Données dans la Table `commandes`
     
@@ -511,7 +511,7 @@ VALUES
     (3, 1, 'Tablette');
 ```
 
-![img_32.png](images/img_31.png)
+![img_32.png](../images/img_31.png)
 Affichage des données des tables `utilisateurs` et `commandes` :
 
 #### Jointure interne : `INNER JOIN`
@@ -534,7 +534,7 @@ Explication de cette commande :
 
 Résultat de jointure interne INNER JOIN :
 
-![img_33.png](images/img_33.png)
+![img_33.png](../images/img_33.png)
 
 Ces commandes SQL créent deux tables liées par une clé étrangère, permettant de gérer les utilisateurs et leurs commandes de manière relationnelle.
 
@@ -564,7 +564,7 @@ Explication de cette commande :
 - `utilisateurs.id = commandes.utilisateur_id` : condition de jointure basée sur les colonnes `id` de `utilisateurs` et `utilisateur_id` de `commandes`
 - `;` : séparateur de requête
 
-![img_34.png](images/img_34.png)
+![img_34.png](../images/img_34.png)
 
 #### Jointure externe à droite : `RIGHT JOIN`
 
@@ -574,7 +574,7 @@ SELECT utilisateurs.nom, utilisateurs.email, commandes.produit
 FROM utilisateurs
 RIGHT JOIN commandes ON utilisateurs.id = commandes.utilisateur_id;
 ```
-![img_35.png](images/img_35.png)
+![img_35.png](../images/img_35.png)
 
 Explication de cette commande :
 
@@ -626,7 +626,7 @@ Explication de cette commande :
 - `UNION` : opérateur pour combiner les résultats de deux requêtes distinctes en un seul ensemble de résultats. (Uniquement pour `MySQL`)
 - `RIGHT JOIN` : type de jointure (jointure externe à droite) signifiant que toutes les lignes de la deuxième table seront retournées, même si elles n'ont pas de correspondance dans la première table
 
-![img_36.png](images/img_36.png)
+![img_36.png](../images/img_36.png)
 
 ### Jointures croisées : `CROSS JOIN`
 
@@ -650,7 +650,7 @@ CROSS JOIN commandes;
 
 Le résultat de cette commande sera le produit `cartésien` des deux tables, combinant chaque ligne de utilisateurs avec chaque ligne de commandes :
 
-![img_37.png](images/img_37.png)
+![img_37.png](../images/img_37.png)
 
 Explications
 
@@ -669,10 +669,10 @@ Exemple Pratique avec Jointures Multiples
 Supposons que nous ayons les trois tables suivantes :
 
 - Table `utilisateurs` : Contient les informations de base sur les utilisateurs.
-![img_38.png](images/img_38.png)
+![img_38.png](../images/img_38.png)
 
 - Table `commandes` : Enregistre les commandes passées par les utilisateurs.
-![img_39.png](images/img_31.png)
+![img_39.png](../images/img_31.png)
 
 - Table `paiements` : Enregistre les paiements effectués par les utilisateurs.
 
@@ -692,7 +692,7 @@ VALUES
     (3, 1, 300.00);
 ```
 
-![img_39.png](images/img_39.png)
+![img_39.png](../images/img_39.png)
 
 #### Jointure multiple avec `INNER JOIN`
 
@@ -702,7 +702,7 @@ FROM utilisateurs
 INNER JOIN commandes ON utilisateurs.id = commandes.utilisateur_id
 INNER JOIN paiements ON commandes.id = paiements.commande_id;
 ```
-![img_40.png](images/img_40.png)
+![img_40.png](../images/img_40.png)
 
 Explication de cette commande :
 
@@ -730,7 +730,7 @@ FROM utilisateurs
 LEFT JOIN commandes ON utilisateurs.id = commandes.utilisateur_id
 LEFT JOIN paiements ON commandes.id = paiements.commande_id;
 ```
-![img_41.png](images/img_41.png)
+![img_41.png](../images/img_41.png)
 
 Les jointures multiples permettent de combiner des données provenant de plusieurs tables en une seule requête. Cela est particulièrement utile pour récupérer des informations liées dans des bases de données relationnelles. En fonction des besoins, vous pouvez utiliser différentes combinaisons de jointures pour obtenir les résultats souhaités.
 
@@ -758,7 +758,7 @@ _ `SELECT` : instruction pour récupérer des données
 - `u.id = c.utilisateur_id` : condition de jointure basée sur les colonnes `id` de `utilisateurs` et `utilisateur_id` de `commandes`
 - `paiements p` : troisième table à interroger avec un alias `p`
 
-![img_43.png](images/img_43.png)
+![img_43.png](../images/img_43.png)
 
 ### Reqêtes  avec jointure multiple complexe ou imbriquée utilisant des alias
 
@@ -799,7 +799,7 @@ Explications
 
 Résultat de la Requête
 
-![img_44.png](images/img_44.png)
+![img_44.png](../images/img_44.png)
 
 Cette requête montre comment utiliser des jointures multiples pour combiner des données de plusieurs tables en une seule requête SQL. En utilisant des alias, nous simplifions la requête et la rendons plus lisible. Les jointures multiples sont particulièrement utiles pour récupérer des informations connexes à partir de plusieurs tables de manière efficace et cohérente.
 
@@ -827,7 +827,7 @@ La commande `SQL SELECT CONCAT(nom, ' - ', email) AS details FROM utilisateurs;`
 
 Supposons que la table utilisateurs contienne les enregistrements suivants :
 
-![img_5.png](images/img_5.png) 
+![img_5.png](../images/img_5.png) 
 
 ```sql
 SELECT CONCAT(nom, ' - ', email) AS details
@@ -835,7 +835,7 @@ FROM utilisateurs;
 ```
 
 Résultat de cette commande :
-![img_7.png](images/img_7.png)
+![img_7.png](../images/img_7.png)
 
 #### La fonction `UPPER` :
 
@@ -846,7 +846,7 @@ FROM utilisateurs;
 
 La commande SQL `SELECT UPPER(nom) AS nom_majuscules FROM utilisateurs;` permet de convertir les valeurs de la colonne nom en majuscules pour chaque enregistrement de la table utilisateurs. Le résultat de cette commande serait une nouvelle colonne appelée nom_majuscules contenant les noms en majuscules.
 
-![img_8.png](images/img_8.png)
+![img_8.png](../images/img_8.png)
 
 #### La fonction `LOWER` :
 
@@ -858,11 +858,11 @@ La commande SQL `SELECT LOWER(email) AS email_minuscules FROM utilisateurs;` per
 
 Supposons que la table utilisateurs contienne les enregistrements suivants :
 
-![img_9.png](images/img_9.png)
+![img_9.png](../images/img_9.png)
 
 Le résultat de la commande serait :
 
-![img_10.png](images/img_10.png)
+![img_10.png](../images/img_10.png)
 
 La commande `LOWER` convertit les valeurs de la colonne `email` en minuscules et les affiche dans une nouvelle colonne appelée `email_minuscules`.
 
@@ -877,7 +877,7 @@ La commande SQL `SELECT LENGTH(nom) AS longueur_nom FROM utilisateurs;` permet d
 
 Supposons que la table utilisateurs contienne les enregistrements suivants :
 
-![img_11.png](images/img_11.png)
+![img_11.png](../images/img_11.png)
 
 Voici comment les longueurs des noms sont calculées :
 
@@ -898,7 +898,7 @@ La commande SQL `SELECT SUBSTRING(nom, 1, 3) AS debut_nom FROM utilisateurs;` pe
 
 Supposons que la table utilisateurs contienne les enregistrements suivants :
 
-![img_12.png](images/img_12.png)
+![img_12.png](../images/img_12.png)
 
 Voici comment les trois premiers caractères des noms sont extraits :
 
@@ -918,7 +918,7 @@ La commande SQL `SELECT REPLACE(email, '@', ' at ') AS email_modifie FROM utilis
 
 Supposons que la table utilisateurs contienne les enregistrements suivants :
 
-![img_13.png](images/img_13.png)
+![img_13.png](../images/img_13.png)
 
 Voici comment les adresses e-mail sont modifiées :
 
@@ -938,11 +938,11 @@ La commande SQL `SELECT TRIM(nom) AS nom_sans_espaces FROM utilisateurs;` permet
 
 Supposons que la table utilisateurs contienne les enregistrements suivants avec des espaces en début et en fin de chaîne dans la colonne nom :
 
-![img_14.png](images/img_14.png)
+![img_14.png](../images/img_14.png)
 
 Voici comment les espaces sont supprimés :
 
-![img_15.png](images/img_15.png)
+![img_15.png](../images/img_15.png)
 
 #### La fonction `LEFT` :
 
@@ -952,7 +952,7 @@ FROM utilisateurs;
 ```
 La commande SQL SELECT LEFT(nom, 3) AS debut_nom FROM utilisateurs; permet d'extraire les trois premiers caractères de la colonne nom pour chaque enregistrement de la table utilisateurs. Le résultat de cette commande serait une nouvelle colonne appelée debut_nom contenant les trois premiers caractères de chaque nom.
 
-![img_16.png](images/img_16.png)
+![img_16.png](../images/img_16.png)
 
 Voici comment les trois premiers caractères des noms sont extraits :
 
@@ -972,7 +972,7 @@ FROM utilisateurs;
 La commande SQL `SELECT RIGHT(nom, 3) AS fin_nom FROM utilisateurs;` permet d'extraire les trois derniers caractères de la colonne `nom` pour chaque enregistrement de la table `utilisateurs`. Le résultat de cette commande serait une nouvelle colonne appelée `fin_nom` contenant les trois derniers caractères de chaque `nom`.
 
 Voici comment les trois derniers caractères des noms sont extraits :
-![img_17.png](images/img_17.png)
+![img_17.png](../images/img_17.png)
 
 - `Alice Dupont` devient `ont`.
 - `Bob Martin` devient `tin`.
@@ -989,7 +989,7 @@ La commande SQL `SELECT REVERSE(nom) AS nom_inverse FROM utilisateurs;` permet d
 
 Voici comment les noms sont inversés :
 
-![img_20.png](images/img_20.png)
+![img_20.png](../images/img_20.png)
 
 - `Alice Dupont` devient `tnopuD ecilA`.
 - `Bob Martin` devient `nitraM boB`.
@@ -1003,7 +1003,7 @@ Les fonctions numériques SQL sont des fonctions intégrées dans SQL qui permet
 
 Considérons la table paiements. Supposons que nous ayons une table paiements avec les enregistrements suivants :
 
-![img_45.png](images/img_45.png)
+![img_45.png](../images/img_45.png)
 
 Nous allons utiliser la commande SQL pour arrondir les valeurs de la colonne montant à deux décimales et afficher le résultat.
 
@@ -1013,7 +1013,7 @@ FROM paiements;
 ```
 Résultat de cette commande : 
 
-![img_46.png](images/img_46.png)
+![img_46.png](../images/img_46.png)
 
 - `ABS` : pour obtenir la valeur absolue d'un nombre
 
@@ -1025,11 +1025,11 @@ FROM paiements;
 La commande SQL `SELECT ABS(montant) AS montant_absolu FROM paiements;` permet de retourner la valeur absolue de la colonne montant pour chaque enregistrement de la table paiements. Le résultat de cette commande serait une nouvelle colonne appelée montant_absolu contenant les valeurs absolues des montants.
 
 Considérons la table paiements.
-![img_48.png](images/img_48.png)
+![img_48.png](../images/img_48.png)
 
 - `CEIL` : pour arrondir un nombre à l'entier supérieur
 
-![img_45.png](images/img_45.png)
+![img_45.png](../images/img_45.png)
 
 ```sql
 SELECT CEIL(montant) AS montant_arrondi_sup
@@ -1040,7 +1040,7 @@ La commande SQL `SELECT CEIL(montant) AS montant_arrondi_sup FROM paiements;` pe
 
 Résultat de cette commande :
 
-![img_49.png](images/img_49.png)
+![img_49.png](../images/img_49.png)
 
 _ `CEIL(montant)` : La fonction `CEIL` arrondit les valeurs de la colonne montant à l'entier supérieur le plus proche.
 _ `AS montant_arrondi_sup` : Utilise un alias pour renommer la colonne résultante en `montant_arrondi_sup`.
@@ -1051,7 +1051,7 @@ Cette requête est utile lorsque vous avez besoin d'arrondir les valeurs numéri
 
 Table paiements avec les enregistrements suivants :
 
-![img_45.png](images/img_45.png)
+![img_45.png](../images/img_45.png)
 
 ```sql
 SELECT FLOOR(montant) AS montant_arrondi_inf
@@ -1062,7 +1062,7 @@ _ `AS montant_arrondi_inf` : Utilise un alias pour renommer la colonne résultan
 
 Résultat de cette commande :
 
-![img_50.png](images/img_50.png)
+![img_50.png](../images/img_50.png)
 
 Cette requête est utile lorsque vous avez besoin d'arrondir les valeurs numériques à l'entier inférieur, par exemple pour des calculs financiers ou des analyses statistiques où les fractions ne sont pas souhaitées.
 
@@ -1264,7 +1264,7 @@ Explication de cette commande :
 - `FROM paiements` : table à interroger
 
 Résultat :
-![img_51.png](images/img_51.png)
+![img_51.png](../images/img_51.png)
 
 - `IF` : Permet de retourner une valeur si une condition est vraie, et une autre valeur si elle est fausse.
 
@@ -1291,7 +1291,7 @@ Explication de cette commande :
 - `FROM utilisateurs` : table à interroger
 
 Résultat :
-![img_52.png](images/img_52.png)
+![img_52.png](../images/img_52.png)
 
 - `COALESCE` : Permet de retourner la première valeur non nulle dans une liste de valeurs.
 
@@ -1319,7 +1319,7 @@ Explication de cette commande :
 
 Résultat :
 
-![img_53.png](images/img_53.png)
+![img_53.png](../images/img_53.png)
 
 - `NULLIF` : Permet de retourner NULL si deux valeurs sont égales, ou la première valeur si elles sont différentes.
 
@@ -1347,7 +1347,7 @@ Explication de cette commande :
 
 Résultat :
 
-![img_54.png](images/img_54.png)
+![img_54.png](../images/img_54.png)
 
 Ces fonctions conditionnelles en SQL permettent d'effectuer des opérations basées sur des conditions spécifiques et de gérer les valeurs NULL de manière flexible et efficace. Elles sont essentielles pour les requêtes complexes nécessitant une logique conditionnelle.
 
@@ -1361,7 +1361,7 @@ Les fonctions agrégées en SQL sont utilisées pour effectuer des calculs sur u
 SELECT COUNT(*) AS nombre_enregistrements
 FROM utilisateurs;
 ```
-![img_55.png](images/img_55.png)
+![img_55.png](../images/img_55.png)
 
 - `SUM` : pour calculer la somme des valeurs d'une colonne
 
@@ -1370,7 +1370,7 @@ SELECT SUM(montant) AS montant_total
 FROM paiements;
 ```
 
-![img_56.png](images/img_56.png)
+![img_56.png](../images/img_56.png)
 
 - `AVG` : pour calculer la moyenne des valeurs d'une colonne
 
@@ -1379,7 +1379,7 @@ SELECT AVG(montant) AS montant_moyen
 FROM paiements;
 ```
 
-![img_57.png](images/img_57.png)
+![img_57.png](../images/img_57.png)
 
 - `MIN` : pour trouver la valeur minimale d'une colonne
 
@@ -1388,7 +1388,7 @@ SELECT MIN(montant) AS montant_min
 FROM paiements;
 ```
 
-![img_59.png](images/img_59.png)
+![img_59.png](../images/img_59.png)
 
 - `MAX` : pour trouver la valeur maximale d'une colonne
 
@@ -1397,7 +1397,7 @@ SELECT MAX(montant) AS montant_max
 FROM paiements;
 ```
 
-![img_60.png](images/img_60.png)
+![img_60.png](../images/img_60.png)
 
 - `GROUP BY` : pour regrouper les enregistrements en fonction de valeurs spécifiques
 
@@ -1407,12 +1407,12 @@ FROM utilisateurs
 GROUP BY ville;
 ```
 
-![img_61.png](images/img_61.png)
+![img_61.png](../images/img_61.png)
 
 - `HAVING` : pour filtrer les résultats des groupes
 
 Supposons que nous avons une table utilisateurs avec les enregistrements suivants :
-![img_62.png](images/img_62.png)
+![img_62.png](../images/img_62.png)
 
 Nous voulons compter le nombre d'utilisateurs par ville, mais nous voulons uniquement afficher les villes avec plus d'un utilisateur. Nous pouvons utiliser la clause `HAVING` pour filtrer les résultats des groupes.
 
@@ -1432,13 +1432,13 @@ Explication de cette commande :
 - `HAVING COUNT(*) > 1` : clause `HAVING` pour filtrer les villes avec plus d'un utilisateur
 
 Résultat de cette commande :
-![img_63.png](images/img_63.png)
+![img_63.png](../images/img_63.png)
 
 La clause HAVING est utilisée après GROUP BY pour filtrer les groupes basés sur les conditions spécifiées. Dans cet exemple, elle permet de trouver les villes ayant plus d'un utilisateur. Cette requête est particulièrement utile pour des analyses nécessitant des filtres sur des agrégations.
 
 - `DISTINCT` : La commande SQL DISTINCT est utilisée pour retourner des enregistrements distincts (uniques) dans les résultats d'une requête. Cela permet d'éliminer les doublons et d'obtenir des valeurs uniques d'une ou plusieurs colonnes.
 
-![img_62.png](images/img_62.png)
+![img_62.png](../images/img_62.png)
 
 ```sql
 SELECT DISTINCT ville
@@ -1454,7 +1454,7 @@ Explication de cette commande :
 
 Résultat de la Requête :
 
-![img_64.png](images/img_64.png)
+![img_64.png](../images/img_64.png)
 
 
 - `DISTINCT` avec `COUNT` : La commande SQL DISTINCT peut également être utilisée avec la fonction COUNT pour compter les valeurs uniques d'une colonne.
@@ -1464,7 +1464,7 @@ SELECT COUNT(DISTINCT ville) AS nombre_villes
 FROM utilisateurs;
 ```
 
-![img_65.png](images/img_65.png)
+![img_65.png](../images/img_65.png)
 
 Cette commande affichera le nombre de villes uniques des utilisateurs dans la table utilisateurs. En utilisant DISTINCT avec COUNT, nous pouvons compter les valeurs uniques d'une colonne spécifique.
 
@@ -1475,7 +1475,7 @@ SELECT DISTINCT nom, ville
 FROM utilisateurs;
 ```
 
-![img_66.png](images/img_66.png)
+![img_66.png](../images/img_66.png)
 
 Cette commande affichera les enregistrements uniques des utilisateurs basés sur les colonnes nom et ville. En utilisant DISTINCT avec plusieurs colonnes, nous pouvons éliminer les doublons basés sur des combinaisons de valeurs de colonnes.
 
@@ -1490,7 +1490,7 @@ GROUP BY ville
 HAVING COUNT(DISTINCT nom) > 1;
 ```
 
-![img_67.png](images/img_67.png)
+![img_67.png](../images/img_67.png)
 
 La commande `DISTINCT` est très utile pour éliminer les doublons et obtenir des valeurs uniques d'une ou plusieurs colonnes. Elle peut être utilisée seule ou en combinaison avec d'autres clauses comme `GROUP BY` et `HAVING` pour effectuer des analyses plus complexes.
 
@@ -1502,11 +1502,11 @@ Exemple pratique avec la table `utilisateurs` et `paiements`
 
 Table utilisateurs :
 
-![img_68.png](images/img_68.png)
+![img_68.png](../images/img_68.png)
 
 Table paiements :
 
-![img_69.png](images/img_69.png)
+![img_69.png](../images/img_69.png)
 
 ### Sous-requêtes dans la clause `WHERE` 
 Pour trouver les utilisateurs qui ont effectué des paiements supérieurs à `600` :
@@ -1522,7 +1522,7 @@ WHERE id IN (SELECT utilisateur_id
 
 Résultat de la Requête :
 
-![img_70.png](images/img_70.png)
+![img_70.png](../images/img_70.png)
 
 
 ### Sous-requêtes dans la clause FROM
@@ -1539,7 +1539,7 @@ ON u.id = p.utilisateur_id;
 ```
 
 Résultat de la Requête :
-![img_71.png](images/img_71.png)
+![img_71.png](../images/img_71.png)
 
 ### Sous-requêtes dans la clause SELECT
 
@@ -1554,7 +1554,7 @@ FROM utilisateurs;
 ```
 
 Résultat de la Requête :
-![img_72.png](images/img_72.png)
+![img_72.png](../images/img_72.png)
 
 ### Sous-requêtes dans la clause HAVING
 
@@ -1594,10 +1594,10 @@ Exemple de Transaction
 Supposons que nous avons deux tables, comptes et transactions, pour gérer des transferts d'argent entre comptes. Nous voulons transférer 100 euros du compte 1 au compte 2. Voici comment nous pourrions le faire en utilisant des transactions :
 
 Table `comptes` :
-![img_73.png](images/img_73.png)
+![img_73.png](../images/img_73.png)
 
 Table `transactions` :
-![img_74.png](images/img_74.png)
+![img_74.png](../images/img_74.png)
 
 Nous voulons transférer 200 unités de Compte A à Compte B. Voici comment nous pourrions le faire en utilisant des transactions :
 ```sql
@@ -1660,13 +1660,13 @@ Explications et Résultats
    - Sélectionne les données de la table comptes pour le compte avec id = 1.
 
 Résultat de la Requête :
-![img_75.png](images/img_75.png)
+![img_75.png](../images/img_75.png)
 
 3. `UPDATE comptes SET solde = solde - 200 WHERE id = 1;` 
    - Met à jour le solde du compte avec id = 1 en déduisant 200.
 
 Table comptes après l'UPDATE :
-![img_76.png](images/img_76.png)
+![img_76.png](../images/img_76.png)
 
 4. `UNLOCK TABLES;` 
    - Déverrouille la table comptes, permettant à d'autres transactions d'accéder à la table.
@@ -1680,7 +1680,7 @@ Résumé des Opérations
 
 Tableau Final de la Table `comptes`
 
-![img_77.png](images/img_77.png)
+![img_77.png](../images/img_77.png)
 
 Cette séquence de commandes assure que les opérations de lecture et de mise à jour sur le compte `id = 1` sont réalisées sans interférence d'autres transactions, grâce aux mécanismes de verrouillage et de déverrouillage.
 
@@ -1693,10 +1693,10 @@ Combiner transactions et verrouillages pour une gestion efficace de la cohérenc
 État initial des tables
 
 Table comptes :
-![img_78.png](images/img_78.png)
+![img_78.png](../images/img_78.png)
 
 Table transactions :
-![img_79.png](images/img_79.png)
+![img_79.png](../images/img_79.png)
 
 ```sql
 START TRANSACTION;
@@ -1726,7 +1726,7 @@ Explications et Résultats
    - Met à jour le solde du compte avec id = 2, en ajoutant 200.
 
 Table comptes après les mises à jour :
-![img_80.png](images/img_80.png)
+![img_80.png](../images/img_80.png)
 
 5. `INSERT INTO transactions (compte_id, montant, type, date_transaction) VALUES (1, 200, 'retrait', NOW());`
    - Insère un enregistrement dans la table transactions pour le retrait de `200` du compte avec `id = 1`.
@@ -1736,7 +1736,7 @@ Table comptes après les mises à jour :
 
 Table transactions après les insertions :
 
-![img_82.png](images/img_82.png)
+![img_82.png](../images/img_82.png)
 
 7. `COMMIT`;
    - Valide toutes les modifications effectuées dans la `transaction`.
@@ -1762,7 +1762,7 @@ Les index sont des structures de données spéciales qui améliorent la vitesse 
 
 Table utilisateurs  avant la création de l'index
 
-![img_83.png](images/img_83.png)
+![img_83.png](../images/img_83.png)
 
 Syntaxe de Création d'un Index
 
@@ -2163,16 +2163,16 @@ La fonction `ROW_NUMBER()` en SQL attribue un numéro de ligne unique à chaque 
 
 Table paiements avant l'exécution de la requête :
 
-![img_84.png](images/img_84.png)
+![img_84.png](../images/img_84.png)
 
 Pour la requête, nous devons également lier ces paiements avec la table utilisateurs pour obtenir le nom des utilisateurs.
 
 Table utilisateurs
-![img_85.png](images/img_85.png)
+![img_85.png](../images/img_85.png)
 
 Résultat de la requête avec la fonction `ROW_NUMBER()` :
 
-![img_86.png](images/img_86.png)
+![img_86.png](../images/img_86.png)
 
 Cette requête permet de lister les paiements avec le nom des utilisateurs et d'attribuer un rang à chaque paiement en fonction de son montant, du plus élevé au plus bas.
 
@@ -2240,7 +2240,7 @@ Exemple de Requête Récursive
 
 Supposons que nous avons une table employes représentant une hiérarchie d'employés avec des superviseurs.
 
-![img_87.png](images/img_87.png)
+![img_87.png](../images/img_87.png)
 
 Création de la CTE Récursive
 

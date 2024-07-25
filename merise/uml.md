@@ -1,6 +1,6 @@
 # Formation Maîtrisez UML : Apprendre UML par la pratique.
 
-![img_2.png](images/img_2.png)
+![img_2.png](../images/img_2.png)
 
 Auteur : Paterne G. G. Formateur en développement web : PHP/ Symfony & Rust
 
@@ -107,7 +107,7 @@ Prenons l'exemple d'un système de gestion de bibliothèque. Les acteurs du syst
 
 Exemple de diagramme de cas d'utilisation pour le système de gestion de bibliothèque :
 
-![img_1.png](images/img_1.png)
+![img_1.png](../images/img_1.png)
 
 ### Diagramme de classes
 

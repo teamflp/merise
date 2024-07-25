@@ -279,8 +279,6 @@ ON MODIFIE LE NOM D'UNE COLONNE
     - SELECT matieres.matiere, MAX(notes.note) FROM notes INNER JOIN matieres ON notes.id_matiere = matieres.id GROUP BY matieres.matiere; // Retourne la note maximale par matière.
 
 
-
-
 Utiliser INNER JOIN pour afficher TOUTES les données des tables stagiaires, matières stagiaires.
 SELECT * FROM stagiaires INNER JOIN notes ON stagiaires.id = notes.id_stagiaire INNER JOIN matieres ON notes.id_matiere = matieres.id;
 

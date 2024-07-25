@@ -1,6 +1,6 @@
 # Merise par la pratique
 
-![img_3.png](images/img_3.png)
+![img_3.png](../images/img_3.png)
 
 ### Auteur : [**Paterne G. G.**](https://www.linkedin.com/in/gnpinformatique/)
 
