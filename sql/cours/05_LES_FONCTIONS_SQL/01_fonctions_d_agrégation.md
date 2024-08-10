@@ -143,4 +143,15 @@ WHERE condition;
 - `MIN()` : La fonction d'agrégation qui retourne la valeur minimale.
 - `MAX()` : La fonction d'agrégation qui retourne la valeur maximale.
 
- 
+Exemple
+
+```sql
+SELECT MIN(prix) AS prix_min
+FROM commandes;
+```
+
+Résultat :
+
+| prix_min |
+| --- |
+| 600.00 |
