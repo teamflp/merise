@@ -61,11 +61,11 @@ La table commandes:
 SELECT * FROM commandes;
 ```
 
-| commande_id | client_id | produit | prix |
-| --- | --- | --- | --- |
-| 1 | 1 | TV | 600.00 |
-| 2 | 2 | Laptop | 1500.00 |
-| 3 | 3 | Phone | 1200.00 |
+| commande_id | client_id | produit | prix    |
+|-------------|-----------|---------|---------|
+| 1           | 1         | TV      | 600.00  |
+| 2           | 2         | Laptop  | 1500.00 |
+| 3           | 3         | Phone   | 1200.00 |
 
 ### Exemple
 
@@ -78,8 +78,8 @@ WHERE prix > 600.00;
 Résultat :
 
 | total_commandes |
-| --- |
-| 1700.00 |
+|-----------------|
+| 1700.00         |
 
 Dans cet exemple, la fonction `SUM(prix)` calcule le total des commandes dont le prix est supérieur à 600.00.
 
@@ -114,8 +114,8 @@ Dans ce code, la fonction `AVG(prix)` calcule la moyenne des prix des commandes 
 Résultat :
 
 | prix_moyen |
-| --- |
-| 1100.00 |
+|------------|
+| 1100.00    |
 
 ## 4. MIN() et MAX()
 
@@ -186,11 +186,19 @@ Il est possible d'utiliser plusieurs fonctions d'agrégation dans une même requ
 ```sql
 SELECT COUNT(*) AS total_commandes,
        SUM(prix) AS total_ventes,
-       ROUND(AVG(prix)) AS prix_moyen,
+       ROUND(AVG(prix), 2) AS prix_moyen,
        MIN(prix) AS prix_min,
        MAX(prix) AS prix_max
 FROM commandes;
 ```
+
+Dans cet exemple, nous combinons les fonctions `COUNT()`, `SUM()`, `AVG()`, `MIN()`, et `MAX()` pour obtenir des statistiques détaillées sur les commandes de la table `commandes`.
+
+Résultat :
+
+| total_commandes | total_ventes | prix_moyen | prix_min | prix_max |
+| --- | --- | --- | --- | --- |
+| 3 | 3300.00 | 1100.00 | 600.00 | 1500.00 |
 
 ## Conclusion
 
