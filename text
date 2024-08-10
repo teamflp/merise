@@ -1,0 +1,284 @@
+sudo apt update && sudo apt upgrade -y
+
+sudo apt install mysql-server
+
+sudo mysql_secure_installation
+
+-------------------------------------------------------------
+
+Les commandes:
+
+SHOW DATABASES;
+CREATE DATABASE nom_de_la_base;
+USE nom_de_la_base;
+CREATE TABLE nom_de_la_table (nom_colonne1 type_colonne1, nom_colonne2 type_colonne2, ...);
+SHOW TABLES;
+INSERT INTO nom_de_la_table (nom_colonne1, nom_colonne2, ...) VALUES (valeur1, valeur2, ...);
+
+-------------------------------------------------------------
+
+Créez une base de donnée appelée formation, et une table appelée stagiaires avec les colonnes suivantes:
+- id int, auto_increment, primary key
+- nom (varchar 255) not null
+- prenom (varchar 255) not null
+- email (varchar 255) not null
+
+INSERT: CREATE TABLE stagiaires (id int auto_increment primary key, nom varchar(100) not null, prenom varchar(100) not null, email varchar(100) not null, telephone varchar(100) not null, age int not null);
+Remplissez la table avec 10 stagiaires de votre choix.
+
+                                          Colonnes:                     Valeurs:
+Syntaxe INSERT: INSERT INTO stagiaires (nom, prenom, email, telephone) VALUES ('nom', 'prenom', 'email', telephone);
+
+
+INSERT INTO stagiaires (nom, prenom, email, telephone, age) VALUES ('Dupont', 'Jean', 'jean@gmail.com', '0606060687', 20), ('Durand', 'Pierre', 'pierre@gmail.com', '0606060687', 37), ('Martin', 'Marc', 'marc@ohtmail.com', '0606060687', 25), ('Toto', 'Marie', 'toto@gmail.com', '0606060687', 37),('Doe', 'John', 'doe@gmail.com', '0606060687', 40),('Marchand', 'le Bouc', 'bouc@gmail.com', '0606060687', 36),('Martin', 'jeanne', 'martin@gmail.com', '0606060687', 55),('Idalgo', 'Anne', 'anne@gmail.com', '0606060687', 18),('Bardella', 'luc', 'luc@gmail.com', '0606060687', 19);
+
+La clause SELECT permet de sélectionner des les données qui correspondent à un critère donné : select nom, prenom, email from stagiaires;
+
+Ajout de colonne:
+ALTER TABLE stagiaires ADD COLUMN telephone varchar(255) not null;
+
+
+Ajouter une colonne après une autre colonne: ALTER TABLE stagiaires ADD age INT AFTER email;
+
+Ajouter une valeur à la colonne telephone: update stagiaires set telephone = '0606060606' where id = 1;
+update stagiaires set ville = 'Paris' where id = 1;
+
+Permet de modifier la valeur de la colonne nom pour le stagiaire ayant l'id 1:
+update stagiaires set nom = 'Dupond' where id = 1;
+
+Suppression des données:
+
+DELETE : supprime les données d'une table sans supprimer l'identifiant
+    DELETE FROM stagiaires WHERE id = 1;
+
+TRUNCATE : Vide une totalement une table sans supprimer la structure elle-même. Elle réinitialise l'identifiant
+    TRUNCATE TABLE stagiaires;
+
+DROP : Supprime une table, une base de données
+    1) Action irréversible
+    2) Supprime la table et toutes les données
+    3) Supprime les index, les triggers, les contraintes, les privilèges
+
+    Avant d'utiliser la commande DROP:
+        - Il est recommandé de faire une sauvegarde de la table ou de la base de données.
+        - Désactiver les contraintes de clé étrangère :
+            1- SET FOREIGN_KEY_CHECKS = 0; Désactiver les contraintes de clé étrangère
+            2- SET FOREIGN_KEY_CHECKS = 1; Réactiver les contraintes de clé étrangère
+
+    DROP TABLE stagiaires;
+
+----------------------------------------------------------
+
+- Modifiez la table stagiaires pour ajouter une colonne ville, et remplissez la colonne ville avec les valeurs pour tous les stagiaires.
+- Modifier le nom du stagiaire ayant l'id 5 pour le changer en 'De Lacroix'.
+- Supprimez le stagiaire ayant l'id 7.
+- Ajouter une colonne age à la table stagiaires, et remplissez la colonne age avec les valeurs pour tous les stagiaires.
+
+----------------------------------------------------------
+
+la clause EXPLAIN
+
+EXPLAIN SELECT * FROM stagiaires WHERE age > 30;
+
+__________________________________________________________
+
+ORDER BY : Permet de trier les résultats d'une requête SQL
+    SELECT * FROM stagiaires ORDER BY age DESC;
+    SELECT * FROM stagiaires ORDER BY age ASC;
+
+---------------------------------------------------------
+
+LES JOINTURES: Permet de combiner les données de deux tables en utilisant une colonne commune entre les deux tables.
+
+1. INNER JOIN : Retourne les enregistrements qui ont des valeurs correspondantes dans les deux tables.
+    SELECT * FROM stagiaires INNER JOIN notes ON stagiaires.id = notes.id_stagiaire;
+
+_ INNER JOIN AVEC LA CLAUSE SELECT
+    SELECT stagiaires.nom, stagiaires.prenom, notes.note FROM stagiaires INNER JOIN notes ON stagiaires.id = notes.id_stagiaire;
+
+
+CREATE TABLE notes (
+    id int auto_increment primary key,
+    id_stagiaire int,
+    note int not null,
+    FOREIGN KEY (id_stagiaire) REFERENCES stagiaires(id)
+);
+
+INSERT INTO
+    notes (id_stagiaire, note)
+VALUES
+    (1, 15), (2, 12), (3, 18), (4, 10), (5, 14), (6, 16), (7, 8), (8, 19), (9, 20), (10, 17);
+
+
+2. LEFT JOIN : Retourne tous les enregistrements de la table de gauche et les enregistrements correspondants de la table de droite.
+    - SELECT * FROM stagiaires LEFT JOIN notes ON stagiaires.id = notes.id_stagiaire;
+    - SELECT stagiaires.nom, stagiaires.prenom, notes.note FROM stagiaires LEFT JOIN notes ON stagiaires.id = notes.id_stagiaire;
+
+3. RIGHT JOIN : Retourne tous les enregistrements de la table de droite et les enregistrements correspondants de la table de gauche.
+    - SELECT * FROM stagiaires RIGHT JOIN notes ON stagiaires.id = notes.id_stagiaire;
+    - SELECT stagiaires.nom, stagiaires.prenom, notes.note FROM stagiaires RIGHT JOIN notes ON stagiaires.id = notes.id_stagiaire;
+
+4. FULL JOIN : Retourne tous les enregistrements lorsqu'il y a une correspondance dans les deux tables.
+    SELECT * FROM stagiaires FULL JOIN notes ON stagiaires.id = notes.id_stagiaire;
+    SELECT stagiaires.nom, stagiaires.prenom, notes.note FROM stagiaires FULL JOIN notes ON stagiaires.id = notes.id_stagiaire;
+
+---------------------------------------------------------
+
+LES OPERATEURS LOGIQUES : Permet de combiner plusieurs conditions dans une requête SQL.
+
+1. AND : Retourne les enregistrements qui satisfont toutes les conditions.
+    SELECT * FROM stagiaires WHERE age > 20 AND age < 30; // Retourne les enregistrements dont l'âge est compris entre 20 et 30.
+    SELECT * FROM stagiaires WHERE age > 20 AND nom LIKE 'D%'; // Retourne les enregistrements dont l'âge est supérieur à 20 et dont le nom commence par 'D'.
+
+2. OR : Retourne les enregistrements qui satisfont au moins une des conditions.
+    SELECT * FROM stagiaires WHERE age < 20 OR age > 30; // Retourne les enregistrements dont l'âge est inférieur à 20 ou supérieur à 30.
+
+3. NOT : Retourne les enregistrements qui ne satisfont pas une condition.
+    SELECT * FROM stagiaires WHERE NOT age > 20; // Retourne les enregistrements dont l'âge est inférieur ou égal à 20. Inverse la condition
+    L'age n'est pas supérieur à 20 mais inférieur ou égal à 20.
+
+4. BETWEEN : Retourne les enregistrements qui se situent entre deux valeurs.
+    SELECT * FROM stagiaires WHERE age BETWEEN 20 AND 30; // Retourne les enregistrements dont l'âge est compris entre 20 et 30.
+
+5. IN : Retourne les enregistrements qui correspondent à une liste de valeurs.
+    SELECT * FROM stagiaires WHERE age IN (20, 25, 30, 37); // Retourne les enregistrements dont l'âge est 20, 25 ou 30.
+
+6. LIKE : Retourne les enregistrements qui correspondent à un motif.
+    SELECT * FROM stagiaires WHERE nom LIKE 'D%'; // Retourne les enregistrements dont le nom commence par 'D'.
+    SELECT * FROM stagiaires WHERE nom LIKE '%t'; // Retourne les enregistrements dont le nom se termine par 't'.
+    SELECT * FROM stagiaires WHERE nom LIKE '%a%'; // Retourne les enregistrements dont le nom contient la lettre 'a'.
+
+7. IS NULL : Retourne les enregistrements qui ont une valeur NULL.
+    SELECT * FROM stagiaires WHERE telephone IS NULL; // Retourne les enregistrements qui n'ont pas de numéro de téléphone.
+
+8. IS NOT NULL : Retourne les enregistrements qui n'ont pas de valeur NULL.
+    SELECT * FROM stagiaires WHERE telephone IS NOT NULL; // Retourne les enregistrements qui ont un numéro de téléphone.
+
+9. LIMIT : Permet de limiter le nombre de résultats retournés par une requête SQL.
+    SELECT * FROM stagiaires LIMIT 5; // Retourne les 5 premiers enregistrements de la table stagiaires.
+
+10. OFFSET : Permet de définir le décalage à partir duquel les résultats sont retournés.
+    SELECT * FROM stagiaires LIMIT 5 OFFSET 5; // Retourne les enregistrements de 6 à 10 de la table stagiaires.
+
+11. GROUP BY : Permet de regrouper les enregistrements en fonction d'une colonne.
+    SELECT age, COUNT(*) FROM stagiaires GROUP BY age; // Retourne le nombre de stagiaires par âge.
+
+12. HAVING : Permet de filtrer les enregistrements regroupés.
+    SELECT age, COUNT(*) FROM stagiaires GROUP BY age HAVING COUNT(*) > 1; // Retourne les âges pour lesquels il y a plus d'un stagiaire.
+
+13. ORDER BY : Permet de trier les résultats d'une requête SQL.
+    SELECT * FROM stagiaires ORDER BY age DESC; // Retourne les enregistrements de la table stagiaires triés par âge de manière décroissante.
+    SELECT * FROM stagiaires ORDER BY age ASC; // Retourne les enregistrements de la table stagiaires triés par âge de manière croissante.
+
+14. DISTINCT : Permet de retourner les valeurs uniques d'une colonne.
+    SELECT DISTINCT age FROM stagiaires;
+
+15. UNION : Permet de combiner les résultats de plusieurs requêtes SQL.
+    SELECT nom, prenom FROM stagiaires WHERE age > 20 UNION SELECT nom, prenom FROM stagiaires WHERE age < 20; // Retourne les noms et prénoms des stagiaires dont l'âge est supérieur à 20 ou inférieur à 20.
+
+16. UNION ALL : Permet de combiner les résultats de plusieurs requêtes SQL en incluant les doublons.
+    SELECT nom, prenom FROM stagiaires WHERE age > 20 UNION ALL SELECT nom, prenom FROM stagiaires WHERE age < 20; // Retourne les noms et prénoms des stagiaires dont l'âge est supérieur à 20 ou inférieur à 20 en incluant les doublons.
+
+17. COUNT : Permet de compter le nombre d'enregistrements retournés par une requête SQL.
+    SELECT COUNT(*) FROM stagiaires; // Retourne le nombre total de stagiaires dans la table stagiaires.
+    SELECT COUNT(*) FROM stagiaires WHERE age > 20; // Retourne le nombre de stagiaires dont l'âge est supérieur à 20.
+
+---------------------------------------------------------
+
+Table matières:
+CREATE TABLE matieres (id int auto_increment primary key, matiere varchar(255) not null);
+
+INSERT INTO matieres (matiere) VALUES ('Mathematiques'), ('Français'), ('Histoire'), ('Géographie'), ('Physique'), ('Chimie'), ('SVT'), ('Anglais'), ('Espagnol'), ('Allemand');
+
+Table notes:
+
+CREATE TABLE notes (
+    id int auto_increment primary key,
+    id_stagiaire int,
+    id_matiere int,
+    note int not null,
+    FOREIGN KEY (id_stagiaire) REFERENCES stagiaires(id),
+    FOREIGN KEY (id_matiere) REFERENCES matieres(id)
+);
+
+- On met à jour la table notes pour ajouter une colonne id_matiere qui fait référence à la table matieres.
+ALTER TABLE notes ADD COLUMN id_matiere int, ADD FOREIGN KEY (id_matiere) REFERENCES matieres(id);
+
+- On place l'attribut id_matiere avant l'attribut note.
+ALTER TABLE notes MODIFY COLUMN id_matiere int AFTER id_stagiaire;
+
+- On met à jour la table note pour ajouter l'id de la matière.
+UPDATE notes SET id_matiere = 1 WHERE id = 11;
+UPDATE notes SET id_matiere = 2 WHERE id = 12;
+UPDATE notes SET id_matiere = 3 WHERE id = 13;
+UPDATE notes SET id_matiere = 4 WHERE id = 14;
+UPDATE notes SET id_matiere = 5 WHERE id = 15;
+UPDATE notes SET id_matiere = 6 WHERE id = 16;
+UPDATE notes SET id_matiere = 7 WHERE id = 17;
+UPDATE notes SET id_matiere = 8 WHERE id = 18;
+UPDATE notes SET id_matiere = 9 WHERE id = 19;
+
+ON MODIFIE LE NOM D'UNE COLONNE
+
+- ALTER TABLE matieres CHANGE COLUMN nom MATIERES varchar(255) not null;
+- ALTER TABLE stagiaires CHANGE COLUMN nom NOM varchar(255) not null, CHANGE COLUMN prenom PRENOM varchar(255) not null, CHANGE COLUMN email EMAIL varchar(255) not null, CHANGE COLUMN telephone TELEPHONE varchar(255) not null, CHANGE COLUMN age AGE int not null;
+- ALTER TABLE notes CHANGE COLUMN id ID int, CHANGE COLUMN id_stagiaire ID_STAGIAIRE int, CHANGE COLUMN id_matiere ID_MATIERE int, CHANGE COLUMN note NOTE int not null;
+
+- UTILISATION DE LA CLAUSE SELECT AVEC LES JOINTURES INTERNES ET JOINTURES EXTERNES
+    1. INNER JOIN
+    - SELECT * FROM stagiaires INNER JOIN notes ON stagiaires.id = notes.id_stagiaire, matieres WHERE notes.id_matiere = matieres.id; // Retourne les informations des stagiaires, des notes et des matières. // Retourne les informations des stagiaires, des notes et des matières.
+    - SELECT stagiaires.nom, stagiaires.prenom, matieres.matiere, notes.note FROM stagiaires INNER JOIN notes ON stagiaires.id = notes.id_stagiaire INNER JOIN matieres ON notes.id_matiere = matieres.id; // Retourne les noms et prénoms des stagiaires, les noms des matières et les notes des stagiaires.
+
+    2. LEFT JOIN
+    - SELECT * FROM stagiaires LEFT JOIN notes ON stagiaires.id = notes.id_stagiaire LEFT JOIN matieres ON notes.id_matiere = matieres.id; // Retourne les informations des stagiaires, des notes et des matières.
+    - SELECT stagiaires.nom, stagiaires.prenom, matieres.matiere, notes.note FROM stagiaires LEFT JOIN notes ON stagiaires.id = notes.id_stagiaire LEFT JOIN matieres ON notes.id_matiere = matieres.id; // Retourne les noms et prénoms des stagiaires, les noms des matières et les notes des stagiaires.
+
+    3. RIGHT JOIN
+    - SELECT * FROM stagiaires RIGHT JOIN notes ON stagiaires.id = notes.id_stagiaire RIGHT JOIN matieres ON notes.id_matiere = matieres.id; // Retourne les informations des stagiaires, des notes et des matières.
+    - SELECT stagiaires.nom, stagiaires.prenom, matieres.matiere, notes.note FROM stagiaires RIGHT JOIN notes ON stagiaires.id = notes.id_stagiaire RIGHT JOIN matieres ON notes.id_matiere = matieres.id; // Retourne les noms et prénoms des stagiaires, les noms des matières et les notes des stagiaires.
+
+    4. FULL OUTER JOIN
+    - SELECT * FROM stagiaires FULL JOIN notes ON stagiaires.id = notes.id_stagiaire FULL JOIN matieres ON notes.id_matiere = matieres.id; // Retourne les informations des stagiaires, des notes et des matières.
+
+
+- UTILISATION DE LA CLAUSE SELECT AVEC LES OPERATEURS LOGIQUES ET LES OPERATEURS DE COMPARAISON SUR LES VILLES, NOTES ET AGES
+
+    - SELECT * FROM stagiaires WHERE ville = 'Paris' AND age > 20; // Retourne les stagiaires qui habitent à Paris et qui ont plus de 20 ans.
+    - SELECT * FROM stagiaires WHERE ville = 'Paris' OR ville = 'Lyon'; // Retourne les stagiaires qui habitent à Paris ou à Lyon.
+    - SELECT * FROM stagiaires WHERE ville = 'Paris' AND (age > 20 OR age < 30); // Retourne les stagiaires qui habitent à Paris et qui ont plus de 20 ans ou moins de 30 ans.
+    - SELECT * FROM stagiaires WHERE ville = 'Paris' AND age BETWEEN 20 AND 30; // Retourne les stagiaires qui habitent à Paris et qui ont entre 20 et 30 ans.
+    - SELECT * FROM stagiaires WHERE ville = 'Paris' AND age IN (20, 25, 30); // Retourne les stagiaires qui habitent à Paris et qui ont 20, 25 ou 30 ans.
+    - SELECT * FROM stagiaires WHERE ville = 'Paris' AND nom LIKE 'D%'; // Retourne les stagiaires qui habitent à Paris et dont le nom commence par 'D'.
+    - SELECT * FROM stagiaires WHERE ville = 'Paris' AND nom LIKE '%t'; // Retourne les stagiaires qui habitent à Paris et dont le nom se termine par 't'.
+    - SELECT * FROM stagiaires WHERE ville = 'Paris' AND nom LIKE '%a%'; // Retourne les stagiaires qui habitent à Paris et dont le nom contient la lettre 'a'.
+    - SELECT * FROM stagiaires WHERE ville = 'Paris' AND telephone IS NULL; // Retourne les stagiaires qui habitent à Paris et qui n'ont pas de numéro de téléphone.
+    - SELECT * FROM stagiaires WHERE ville = 'Paris' AND telephone IS NOT NULL; // Retourne les stagiaires qui habitent à Paris et qui ont un numéro de téléphone.
+    - SELECT * FROM stagiaires WHERE ville = 'Paris' AND age > 20 ORDER BY age DESC; // Retourne les stagiaires qui habitent à Paris et qui ont plus de 20 ans triés par âge de manière décroissante.
+    - SELECT * FROM stagiaires WHERE ville = 'Paris' AND age > 20 LIMIT 5; // Retourne les 5 premiers stagiaires qui habitent à Paris et qui ont plus de 20 ans.
+
+- UTILISATION DE LA CLAUSE SELECT AVEC LES FONCTIONS AGREGATS
+
+        - SELECT COUNT(*) FROM stagiaires; // Retourne le nombre total de stagiaires dans la table stagiaires.
+        - SELECT COUNT(*) FROM stagiaires WHERE age > 20; // Retourne le nombre de stagiaires qui ont plus de 20 ans.
+        - SELECT age, COUNT(*) FROM stagiaires GROUP BY age; // Retourne le nombre de stagiaires par âge.
+        - SELECT age, COUNT(*) FROM stagiaires GROUP BY age HAVING COUNT(*) > 1; // Retourne les âges pour lesquels il y a plus d'un stagiaire.
+        - SELECT SUM(note) FROM notes; // Retourne la somme des notes des stagiaires.
+        - SELECT AVG(note) FROM notes; // Retourne la moyenne des notes des stagiaires.
+        - SELECT MIN(note) FROM notes; // Retourne la note minimale des stagia
+        - SELECT MAX(note) FROM notes; // Retourne la note maximale des stagia
+
+- UTILISATION DE LA CLAUSE SELECT AVEC LES FONCTIONS D'AGREGATION ET LES FONCTIONS DE GROUPE
+
+    - SELECT matieres.matiere, AVG(notes.note) FROM notes INNER JOIN matieres ON notes.id_matiere = matieres.id GROUP BY matieres.matiere; // Retourne la moyenne des notes par matière.
+    - SELECT matieres.matiere, AVG(notes.note) FROM notes INNER JOIN matieres ON notes.id_matiere = matieres.id GROUP BY matieres.matiere HAVING AVG(notes.note) > 10; // Retourne la moyenne des notes par matière pour les matières dont la moyenne des notes est supérieure à 10.
+    - SELECT matieres.matiere, COUNT(notes.note) FROM notes INNER JOIN matieres ON notes.id_matiere = matieres.id GROUP BY matieres.matiere; // Retourne le nombre de notes par matière.
+    - SELECT matieres.matiere, COUNT(notes.note) FROM notes INNER JOIN matieres ON notes.id_matiere = matieres.id GROUP BY matieres.matiere HAVING COUNT(notes.note) > 5; // Retourne le nombre de notes par matière pour les matières qui ont plus de 5 notes.
+    - SELECT matieres.matiere, SUM(notes.note) FROM notes INNER JOIN matieres ON notes.id_matiere = matieres.id GROUP BY matieres.matiere; // Retourne la somme des notes par matière.
+    - SELECT matieres.matiere, SUM(notes.note) FROM notes INNER JOIN matieres ON notes.id_matiere = matieres.id GROUP BY matieres.matiere HAVING SUM(notes.note) > 50; // Retourne la somme des notes par matière pour les matières dont la somme des notes est supérieure à 50.
+    - SELECT matieres.matiere, MIN(notes.note) FROM notes INNER JOIN matieres ON notes.id_matiere = matieres.id GROUP BY matieres.matiere; // Retourne la note minimale par matière.
+    - SELECT matieres.matiere, MAX(notes.note) FROM notes INNER JOIN matieres ON notes.id_matiere = matieres.id GROUP BY matieres.matiere; // Retourne la note maximale par matière.
+
+
+Utiliser INNER JOIN pour afficher TOUTES les données des tables stagiaires, matières stagiaires.
+SELECT * FROM stagiaires INNER JOIN notes ON stagiaires.id = notes.id_stagiaire INNER JOIN matieres ON notes.id_matiere = matieres.id;
+
