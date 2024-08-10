@@ -23,10 +23,10 @@ Dans cet exemple, la fonction `CONCAT` est utilisée pour combiner les colonnes 
 
 Résultat :
 
-| nom_complet   |
-|---------------|
-| Alice Dupont  |
-| Bob Martin    |
+| nom_complet |
+| --- |
+| Alice Dupont |
+| Bob Martin |
 | Claire Dubois |
 
 #### Remarque
@@ -38,7 +38,7 @@ Si l'une des chaînes passées à `CONCAT` est `NULL`, la fonction retournera `N
 La fonction `SUBSTRING` est utilisée pour extraire une sous-chaîne d'une chaîne de caractères. Elle est particulièrement utile lorsque vous avez besoin d'une partie spécifique d'une chaîne, comme un code postal, un domaine d'adresse e-mail, ou tout autre extrait de texte.
 
 #### Syntaxe
-    
+
 ```sql
 SELECT SUBSTRING(string, start, length) AS sub_string
 FROM table_name
@@ -65,7 +65,15 @@ Dans cet exemple, la fonction `SUBSTRING` est utilisée pour extraire les cinq p
 Résultat :
 
 | domaine_email |
-|---------------|
-| bob@e         |
-| clair         |
-| pater         |
+| --- |
+| bob@e |
+| clair |
+| pater |
+
+### 3. Fonction `REPLACE`
+
+#### Description
+
+La fonction `REPLACE` permet de remplacer toutes les occurrences d'une sous-chaîne par une autre chaîne dans une chaîne donnée. C'est une fonction puissante pour nettoyer ou formater des données textuelles.
+
+#### Syntaxe
