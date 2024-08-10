@@ -77,3 +77,36 @@ Résultat :
 La fonction `REPLACE` permet de remplacer toutes les occurrences d'une sous-chaîne par une autre chaîne dans une chaîne donnée. C'est une fonction puissante pour nettoyer ou formater des données textuelles.
 
 #### Syntaxe
+
+```sql
+SELECT REPLACE(chaine, ancienne_sous_chaine, nouvelle_sous_chaine) AS new_string
+FROM table_name
+WHERE condition;
+
+SELECT * FROM utilisateurs;
+```
+
+- **chaine** : La chaîne de caractères d'origine.
+- **ancienne_sous_chaine** : La sous-chaîne à rechercher et à remplacer.
+- **nouvelle_sous_chaine** : La sous-chaîne qui remplacera l'ancienne.
+
+#### Exemple
+
+```sql
+SELECT REPLACE(nom, 'a', 'o') AS nom_modifie
+FROM utilisateurs;
+```
+
+Dans cet exemple, la fonction `REPLACE` est utilisée pour remplacer toutes les occurrences de la lettre `a` par la lettre `o` dans la colonne `nom` de la table `utilisateurs`.
+
+Résultat :
+
+| nom_modifie |
+| --- |
+| Alice Dupont |
+| Bob Morton |
+| Cloure Dubois |
+
+Les fonctions de chaîne comme `CONCAT`, `SUBSTRING`, et `REPLACE` sont des outils puissants en SQL pour manipuler et transformer les données textuelles. Elles permettent d'extraire, de combiner, et de reformater des chaînes de caractères de manière flexible et efficace. Leur utilisation appropriée peut simplifier de nombreuses tâches de gestion et de transformation des données dans une base de données.
+
+Il est important de se familiariser avec ces fonctions et de les utiliser dans le contexte approprié pour maximiser leur utilité dans vos requêtes SQL.
