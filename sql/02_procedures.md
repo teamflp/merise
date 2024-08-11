@@ -62,7 +62,7 @@ SELECT * FROM compte;
 Les procédures stockées sont des blocs de code SQL nommés et stockés dans la base de données. Elles peuvent être appelées et exécutées à partir d'une application ou d'une autre procédure stockée.
 
 ```sql
-DELIMITER //
+DELIMITER // 
 
 CREATE PROCEDURE ajouter_transaction(
     IN nom VARCHAR(100),
@@ -79,7 +79,7 @@ DELIMITER ;
 Pour appeler une procédure stockée, on utilise l'instruction `CALL` suivie du nom de la procédure et des paramètres nécessaires.
 
 ```sql
-CALL ajouter_transaction('Ronaldo', 'Cristiano', 'ronaldo@gamil.fr');
+CALL ajouter_transaction('Ronaldo', 'Cristiano', 'ronaldo@gamil.fr'); 
 ```
 
 ### 1. Création de la Base de Données
@@ -103,7 +103,7 @@ CREATE TABLE transactions (
     nom VARCHAR(100) NOT NULL,
     prenom VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id) 
 )
 
 CREATE TABLE compte (
@@ -121,7 +121,7 @@ Cette procédure permet de transférer des fonds d'un compte bancaire à un autr
 
 Code :
 ```sql
-DELIMITER //
+DELIMITER // -- Délimiteur personnalisé
 
 CREATE PROCEDURE transfertFonds(IN id_source INT, IN id_dest INT, IN mont_transf DECIMAL(10, 2))
 BEGIN
@@ -153,10 +153,10 @@ Utilisation :
 Pour transférer des fonds d'un compte à un autre, il suffit d'appeler la procédure transfertFonds en spécifiant l'ID du compte source, l'ID du compte destination et le montant à transférer.
 
 ```sql
-CALL transfertFonds(1, 2, 500);
+CALL transfertFonds(1, 2, 250); 
 ```
 
-### 4. Procédure de Vérification de Solde
+### 4. Procédure de Vérification de Solde 
 
 Description :
 
@@ -178,7 +178,7 @@ BEGIN
     -- Afficher le solde
     SELECT solde AS 'Solde du compte';
 END //
-DELIMITER ;
+DELIMITER ; 
 ```
 
 Utilisation :
@@ -186,7 +186,7 @@ Utilisation :
 Pour vérifier le solde d'un compte, il suffit d'appeler la procédure verifierSolde en spécifiant l'ID du compte.
 
 ```sql
-CALL verifierSolde(1);
+CALL verifierSolde(2);
 ```
 
 ### 5. Procédure de Suppression de Compte
@@ -213,7 +213,7 @@ BEGIN
 
     COMMIT;
 END //
-DELIMITER ;
+DELIMITER ; 
 ```
 
 Utilisation :
@@ -221,7 +221,7 @@ Utilisation :
 Pour supprimer un compte bancaire, il suffit d'appeler la procédure supprimerCompte en spécifiant l'ID du compte.
 
 ```sql
-CALL supprimerCompte(1);
+CALL supprimerCompte(1); 
 ```
 
 ### 6. procédure non générique de création des Tables users et comment et insertion des données
@@ -240,7 +240,7 @@ BEGIN
         id INT AUTO_INCREMENT PRIMARY KEY,
         nom VARCHAR(100),
         prenom VARCHAR(100),
-        email VARCHAR(100)
+        email VARCHAR(100) 
     );
 
     CREATE TABLE IF NOT EXISTS comment (
@@ -250,7 +250,7 @@ BEGIN
         FOREIGN KEY(id_user) REFERENCES users(id)
     );
 
-    SELECT 'Tables Users, Comment créées ou déjà existantes.' AS Resultat;
+    SELECT "Tables Users, Comment créées ou déjà existantes." AS Resultat;
 END //
 
 DELIMITER ;
@@ -261,7 +261,7 @@ Utilisation :
 Pour créer les tables users et comment, il suffit d'appeler la procédure createTables.
 
 ```sql
-CALL createTables();
+CALL createTables(); 
 ```
 
 ### 7. Procédure générique pour l'insertion des données dans une table
@@ -272,7 +272,7 @@ Cette procédure permet d'insérer un utilisateur et son commentaire associé da
 Code :
     
 ```sql
-DELIMITER //
+DELIMITER // 
 
 CREATE PROCEDURE insertData(IN nom VARCHAR(100), IN prenom VARCHAR(100), IN email VARCHAR(100), IN commentaire TEXT)
 BEGIN
@@ -294,7 +294,7 @@ Utilisation :
 Pour insérer des données dans les tables users et comment, il suffit d'appeler la procédure insertData en spécifiant le nom, le prénom, l'email et le commentaire de l'utilisateur.
 
 ```sql
-CALL insertData('Dupont', 'Jean', 'jean@gmail.com', 'Ceci est un commentaire.');
+CALL insertData('Dupont', 'Jean', 'jean@gmail.com', 'Ceci est un commentaire.'); 
 ```
 
 ### 8. Procedure générique pour insertion Multiple de Données
@@ -307,12 +307,9 @@ Code :
 ```sql
 DELIMITER //
 
-CREATE PROCEDURE insertMultipleData(
-    IN user_names TEXT,
-    IN commentaires TEXT
-)
+CREATE PROCEDURE insertMultipleData(IN user_names TEXT, IN commentaires TEXT)
 BEGIN
-    DECLARE user_nom VARCHAR(100);
+    DECLARE user_nom VARCHAR(100); 
     DECLARE user_prenom VARCHAR(100);
     DECLARE user_email VARCHAR(100);
     DECLARE user_id INT;
@@ -324,7 +321,7 @@ BEGIN
     SET comment_count = LENGTH(commentaires) - LENGTH(REPLACE(commentaires, '|', '')) + 1;
 
     IF user_count != comment_count THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Le nombre d\'utilisateurs doit correspondre au nombre de commentaires.';
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = "Le nombre d\'utilisateurs doit correspondre au nombre de commentaires.";
     END IF;
 
     WHILE i <= user_count DO
@@ -343,7 +340,7 @@ BEGIN
         SET i = i + 1;
     END WHILE;
 
-    SELECT 'Données insérées avec succès.' AS Resultat;
+    SELECT "Données insérées avec succès." AS Resultat;
 END //
 
 DELIMITER ; 
@@ -357,7 +354,7 @@ Pour insérer des données pour plusieurs utilisateurs et leurs commentaires res
 CALL insertMultipleData(
     'Dolby, Marius, dolby@gmail.com|Biden, Joe, joe@gmail.com',
     'Commentaire pour Dolby Marius|Commentaire pour Joe Biden'
-);
+); 
 ```
 
 ### 9. Procédure pour Supprimer un Utilisateur et ses Commentaires
@@ -369,8 +366,7 @@ Cette procédure permet de supprimer un utilisateur et tous ses commentaires ass
 Code :
 
 ```sql
-
-DELIMITER //
+DELIMITER // 
 
 CREATE PROCEDURE supprimerUtilisateur(IN id_user INT)
 
@@ -391,7 +387,7 @@ Utilisation :
 Pour supprimer un utilisateur et ses commentaires associés, il suffit d'appeler la procédure supprimerUtilisateur en spécifiant l'ID de l'utilisateur.
 
 ```sql
-CALL supprimerUtilisateur(1);
+CALL supprimerUtilisateur(1); 
 ```
 
 ### 10. Gestion des Procédures Stockées
@@ -430,7 +426,7 @@ Les verrouillages sont associés à des niveaux d'isolation qui définissent le 
 ### Exemple de Verrouillage
 
 ```sql
-START TRANSACTION;
+START TRANSACTION; 
 
 SELECT * FROM compte WHERE id = 1 FOR UPDATE; -- Verrouillage en écriture
 UPDATE compte SET montant = montant - 100 WHERE id = 1;
@@ -446,18 +442,20 @@ Les transactions et les verrouillages sont des concepts essentiels en gestion de
 
 -- ---------------------------------------------------------------------------------------------------
 
--- TRANSACTION ET VERROUILLAGES --
--- Sont des concepts en gestion de base de données, pour assurer la cohérence des données dans un environnement où p
--- utilisateurs ou processus peuvent accéder nsimultanément à la meme base de données.
+## TRANSACTION ET VERROUILLAGES
+Sont des concepts en gestion de base de données, pour assurer la cohérence des données dans un environnement où des
+utilisateurs ou processus peuvent accéder simultanément à la meme base de données.
 
--- TRANSACTIONS : est un ensemble d'instructions SQL qui doivent être exécutées ensemble ou pas du tout.
+### TRANSACTIONS : 
+Est un ensemble d'instructions SQL qui doivent être exécutées ensemble ou pas du tout.
 
--- Une transaction possède 4 proprités appelées ACID :
--- Atomicité : une transaction est une unité indivisible, soit toutes les instructions sont exécutées, soit aucu
--- Cohérence : une transaction doit laisser la base de données dans un état cohérent.
--- Isolation : une transaction doit être isolée des autres transactions.
--- Durabilité : une transaction doit être durable, c'est-à-dire que les modifications apportées par une transact
+- Une transaction possède 4 proprités appelées ACID :
+- Atomicité : une transaction est une unité indivisible, soit toutes les instructions sont exécutées, soit aucu
+- Cohérence : une transaction doit laisser la base de données dans un état cohérent.
+- Isolation : une transaction doit être isolée des autres transactions.
+- Durabilité : une transaction doit être durable, c'est-à-dire que les modifications apportées par une transact
 
+```sql
 CREATE DATABASE compte_bancaire;
 USE compte_bancaire;
 
@@ -513,5 +511,6 @@ COMMIT; -- valide la transaction
 ELSE
 ROLLBACK; -- annule la transaction
 END IF;
+```
 
 

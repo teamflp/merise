@@ -329,9 +329,11 @@ GROUP BY hotels.nom_hotel;
 
 SELECT vols.numero_vol, vols.compagnie_aerienne
 FROM vol_reservation
-         JOIN vols ON vol_reservation.vol_id = vols.id
-         JOIN reservations ON vol_reservation.reservation_id = reservations.id
+JOIN vols
+    ON vol_reservation.vol_id = vols.id
+JOIN reservations
+    ON vol_reservation.reservation_id = reservations.id
 WHERE reservations.destination_id  = 4
-  AND
-    reservations.destination_id IN (SELECT id FROM destination WHERE ville = 'Paris');
+    AND reservations.destination_id
+IN (SELECT id FROM destination WHERE ville = 'Paris');
 

@@ -23,10 +23,10 @@ Dans cet exemple, la fonction `CONCAT` est utilisée pour combiner les colonnes 
 
 Résultat :
 
-| nom_complet |
-| --- |
-| Alice Dupont |
-| Bob Martin |
+| nom_complet   |
+|---------------|
+| Alice Dupont  |
+| Bob Martin    |
 | Claire Dubois |
 
 #### Remarque
@@ -65,10 +65,10 @@ Dans cet exemple, la fonction `SUBSTRING` est utilisée pour extraire les cinq p
 Résultat :
 
 | domaine_email |
-| --- |
-| bob@e |
-| clair |
-| pater |
+|---------------|
+| bob@e         |
+| clair         |
+| pater         |
 
 ### 3. Fonction `REPLACE`
 
@@ -101,10 +101,10 @@ Dans cet exemple, la fonction `REPLACE` est utilisée pour remplacer toutes les 
 
 Résultat :
 
-| nom_modifie |
-| --- |
-| Alice Dupont |
-| Bob Morton |
+| nom_modifie   |
+|---------------|
+| Alice Dupont  |
+| Bob Morton    |
 | Cloure Dubois |
 
 Les fonctions de chaîne comme `CONCAT`, `SUBSTRING`, et `REPLACE` sont des outils puissants en SQL pour manipuler et transformer les données textuelles. Elles permettent d'extraire, de combiner, et de reformater des chaînes de caractères de manière flexible et efficace. Leur utilisation appropriée peut simplifier de nombreuses tâches de gestion et de transformation des données dans une base de données.

@@ -36,7 +36,6 @@ SELECT AVG(prix) AS prix_moyen FROM commandes;
 ```
 
 ## Exemples de Fonctions SQL Courantes
-
 Voici quelques exemples de fonctions SQL couramment utilisées :
 
 ### Fonctions d'Agrégation :
@@ -59,5 +58,4 @@ Voici quelques exemples de fonctions SQL couramment utilisées :
 - `DATEDIFF()`: Calcule la différence entre deux dates.
 
 ## Conclusion
-
 Les fonctions SQL sont des composants puissants qui augmentent considérablement les capacités de manipulation et d'analyse des données directement dans les requêtes SQL. Elles permettent d'écrire des requêtes plus concises, efficaces et maintenables. Maîtriser l'utilisation des fonctions dans SQL est essentiel pour tout développeur ou analyste travaillant avec des bases de données relationnelles.
