@@ -1,8 +1,8 @@
-### Principes de base
+## Principes de base
 
 SQL, ou Structured Query Language, est un langage de requête utilisé pour communiquer avec une base de données relationnelle. Il permet d'effectuer diverses opérations telles que la création, la modification, la suppression et la récupération de données dans une base de données. SQL est un langage déclaratif, ce qui signifie que l'utilisateur spécifie ce qu'il souhaite obtenir sans devoir préciser comment le système doit exécuter la requête.
 
-SQL est composé de plusieurs sous-ensembles, notamment :
+### SQL est composé de plusieurs sous-ensembles, notamment :
 
 - **DDL (Data Definition Language)** : utilisé pour définir et modifier les schémas de base de données, par exemple en créant ou en modifiant des tables et des index.
 - **DML (Data Manipulation Language)** : utilisé pour manipuler les données, par exemple en insérant, en mettant à jour ou en supprimant des enregistrements.
@@ -25,3 +25,9 @@ Au fil des ans, SQL a évolué pour inclure de nombreuses fonctionnalités avanc
 6. Les procédures stockées pour exécuter des blocs de code SQL de manière répétée et efficace.
 
 SQL est pris en charge par la plupart des systèmes de gestion de bases de données relationnelles, notamment MySQL, PostgreSQL, Oracle, SQL Server, et SQLite, ce qui en fait un standard incontournable pour la gestion des données.
+
+Lien vers la [Wikipedia](https://fr.wikipedia.org/wiki/Structured_Query_Language)
+
+---
+
+ **[<< Cours précédent : Introduction à SQL](01_histoire.md) | [Cours suivant : Les fonctions SQL >>](03_avantages.md)**

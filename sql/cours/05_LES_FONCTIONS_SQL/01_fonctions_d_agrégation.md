@@ -80,8 +80,7 @@ Résultat :
 | total_commandes   |
 |-------------------|
 | 1700.00           |
-| ----------------- |
-| 1700.00           |
+
 
 Dans cet exemple, la fonction `SUM(prix)` calcule le total des commandes dont le prix est supérieur à 600.00.
 
@@ -145,4 +144,34 @@ WHERE condition;
 - `MIN()` : La fonction d'agrégation qui retourne la valeur minimale.
 - `MAX()` : La fonction d'agrégation qui retourne la valeur maximale.
 
- 
+### Exemple
+
+```sql
+SELECT MIN(prix) AS prix_min
+FROM commandes;
+```
+
+Résultat :
+
+| prix_min |
+|----------|
+| 600.00   |
+
+Dans cet exemple, la fonction `MIN(prix)` retourne le prix minimum parmi toutes les commandes dans la table `commandes`.
+
+```sql
+SELECT MAX(prix) AS prix_max
+FROM commandes;
+```
+
+Résultat :
+
+| prix_max |
+|----------|
+| 1500.00  |
+
+Dans cet exemple, la fonction `MAX(prix)` retourne le prix maximum parmi toutes les commandes dans la table `commandes`.
+
+## Conclusion
+
+Les fonctions d'agrégation en SQL sont des outils puissants pour résumer et analyser des données. Elles permettent de calculer des statistiques utiles sur les enregistrements d'une table. En utilisant des fonctions comme `COUNT`, `SUM`, `AVG`, `MIN`, et `MAX`, vous pouvez obtenir des informations précieuses sur vos données et prendre des décisions éclairées en fonction de ces informations.

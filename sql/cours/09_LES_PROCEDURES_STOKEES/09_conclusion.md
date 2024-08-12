@@ -1,0 +1,3 @@
+## Conclusion
+
+Les procédures stockées sont des objets de base de données qui permettent de regrouper des instructions SQL et de les exécuter de manière répétée sans avoir à les réécrire à chaque fois. Elles offrent de nombreux avantages, tels que l'amélioration des performances, la réutilisabilité du code et la sécurité des données. En utilisant les procédures stockées, vous pouvez simplifier la gestion de vos bases de données et améliorer l'efficacité de vos applications.

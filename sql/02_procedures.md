@@ -460,19 +460,19 @@ CREATE DATABASE compte_bancaire;
 USE compte_bancaire;
 
 CREATE TABLE transactions (
-id INT AUTO_INCREMENT,
-nom VARCHAR(100) NOT NULL,
-prenom VARCHAR(100) NOT NULL,
-email VARCHAR(100) NOT NULL,
-PRIMARY KEY (id)
+    id INT AUTO_INCREMENT,
+    nom VARCHAR(100) NOT NULL,
+    prenom VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE compte (
-id INT AUTO_INCREMENT,
-id_transaction INT,
-montant DECIMAL(10, 2),
-PRIMARY KEY (id),
-FOREIGN KEY (id_transaction) REFERENCES transactions(id)
+    id INT AUTO_INCREMENT,
+    id_transaction INT,
+    montant DECIMAL(10, 2),
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_transaction) REFERENCES transactions(id)
 );
 
 INSERT INTO transactions (nom, prenom, email)

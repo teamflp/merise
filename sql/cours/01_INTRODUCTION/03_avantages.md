@@ -20,3 +20,7 @@ Voici quelques-uns des principaux avantages de SQL :
 14. **Éducation et formation** : SQL est largement enseigné dans les écoles, les universités, les bootcamps, les formations en ligne, etc., pour former les étudiants, les professionnels et les passionnés aux bases de données relationnelles et à la gestion des données. Il est un outil essentiel pour acquérir des compétences en informatique et en science des données.
 
 En conclusion, SQL offre de nombreux avantages pour la gestion des bases de données relationnelles, tels que la simplicité, la normalisation, la puissance, la flexibilité, la popularité, la compatibilité, l'évolutivité, la sécurité, la performance, l'intégration, la documentation, les outils, la compatibilité, l'écosystème, l'éducation, etc. Il est un langage essentiel pour interroger, manipuler et gérer les données dans les bases de données relationnelles, et il est largement utilisé dans l'industrie pour les applications de gestion de données. SQL est un outil indispensable pour les développeurs, les administrateurs de bases de données et les analystes de données pour travailler efficacement avec les données et les bases de données.
+
+---
+
+**[<< Cours précédent : Principes de base](02_principe_de_base.md) | [Cours suivant : Syntaxe SQL >>](04_syntaxe.md)**

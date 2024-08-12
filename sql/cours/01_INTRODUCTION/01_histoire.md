@@ -6,3 +6,8 @@ SQL est un langage déclaratif, ce qui signifie que l'utilisateur spécifie ce q
 
 SQL a évolué au fil des ans pour inclure de nombreuses fonctionnalités avancées telles que les 
 
+Lien vers la [Wikipedia](https://fr.wikipedia.org/wiki/Structured_Query_Language)
+
+---
+Cours suivant : [Les fonctions SQL >>](02_principe_de_base.md)
+
