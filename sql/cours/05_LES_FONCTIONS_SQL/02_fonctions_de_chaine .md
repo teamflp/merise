@@ -107,6 +107,46 @@ Résultat :
 | Bob Morton |
 | Cloure Dubois |
 
-Les fonctions de chaîne comme `CONCAT`, `SUBSTRING`, et `REPLACE` sont des outils puissants en SQL pour manipuler et transformer les données textuelles. Elles permettent d'extraire, de combiner, et de reformater des chaînes de caractères de manière flexible et efficace. Leur utilisation appropriée peut simplifier de nombreuses tâches de gestion et de transformation des données dans une base de données.
+
+### La fonction `LENGTH`
+
+La fonction lenght() permet de retourner la longueur d'une chaîne de caractères en SQL. Elle est utile pour déterminer le nombre de caractères dans une chaîne donnée, ce qui peut être utile dans divers scénarios, tels que la validation de la longueur d'une entrée utilisateur ou la manipulation de données textuelles.
+
+Syntaxe
+
+```sql
+SELECT LENGTH(chaine) AS longueur
+FROM table_name
+WHERE condition;
+```
+
+- `chaine` : La chaîne de caractères dont vous souhaitez connaître la longueur.
+- `LENGTH()` : La fonction qui retourne la longueur de la chaîne.
+- `AS longueur` : L'alias de la colonne résultante.
+- `table_name` : Le nom de la table à interroger.
+- `condition` : La condition à appliquer pour filtrer les lignes.
+- `SELECT` : La clause qui spécifie les colonnes à sélectionner.
+- `FROM` : La clause qui spécifie la table à interroger.
+- `WHERE` : La clause qui spécifie les conditions pour filtrer les lignes.
+- `AS` : Le mot-clé qui permet de définir un alias pour une colonne ou une table.
+- `longueur` : L'alias de la colonne résultante.
+
+Exemple
+
+```sql
+SELECT LENGTH(nom) AS longueur_nom
+FROM utilisateurs;
+```
+
+Dans cet exemple, la fonction `LENGTH` est utilisée pour retourner la longueur de la colonne `nom` de la table `utilisateurs`, représentant le nombre de caractères dans chaque nom d'utilisateur.
+
+Résultat :
+
+| longueur_nom |
+|--------------| 
+| 11           |
+
+
+Les fonctions de chaîne comme `CONCAT`, `SUBSTRING`, `REPLACE` et `LENGTH` sont des outils puissants en SQL pour manipuler et transformer les données textuelles. Elles permettent d'extraire, de combiner, et de reformater des chaînes de caractères de manière flexible et efficace. Leur utilisation appropriée peut simplifier de nombreuses tâches de gestion et de transformation des données dans une base de données.
 
 Il est important de se familiariser avec ces fonctions et de les utiliser dans le contexte approprié pour maximiser leur utilité dans vos requêtes SQL.

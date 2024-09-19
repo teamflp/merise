@@ -1,13 +1,16 @@
 ### Histoire de SQL
 
-SQL (Structured Query Language) est un langage de programmation standardisé pour la gestion des bases de données relationnelles. Il a été développé dans les années 1970 par IBM et est devenu un standard de facto pour l'interrogation, la manipulation et la gestion des données dans les bases de données relationnelles.
+SQL, ou Structured Query Language, est un langage de programmation standard utilisé pour gérer les bases de données relationnelles. Créé par IBM dans les années 1970, il est devenu l’outil incontournable pour interroger, modifier et gérer les données.
 
-SQL est un langage déclaratif, ce qui signifie que l'utilisateur spécifie ce qu'il veut obtenir sans avoir à préciser comment l'obtenir. Il est largement utilisé dans les applications web, les systèmes de gestion de bases de données (SGBD) et les entrepôts de données pour effectuer des opérations telles que la création, la modification et la suppression de données.
+SQL est déclaratif, ce qui signifie que l'on indique ce que l'on souhaite obtenir sans préciser comment y arriver. On le retrouve partout : dans les applications web, les systèmes de gestion de bases de données (SGBD) et les entrepôts de données pour créer, modifier ou supprimer des informations.
 
-SQL a évolué au fil des ans pour inclure de nombreuses fonctionnalités avancées telles que les 
+Au fil du temps, SQL s'est enrichi de fonctionnalités avancées comme les fenêtres de données, les procédures stockées, les déclencheurs, les vues, les index, et les transactions. La plupart des SGBD, tels que MySQL, PostgreSQL, Oracle, SQL Server ou SQLite, le prennent en charge.
+
+SQL est standardisé par l’ANSI et l’ISO, et a évolué en différentes versions, comme SQL-86, SQL-92, SQL:1999, SQL:2008, jusqu’à SQL:2016. Ce langage reste un outil puissant et polyvalent pour manipuler les données de manière simple et efficace.
+
 
 Lien vers la [Wikipedia](https://fr.wikipedia.org/wiki/Structured_Query_Language)
 
 ---
-Cours suivant : [Les fonctions SQL >>](02_principe_de_base.md)
 
+Cours suivant : [Les fonctions SQL &gt;&gt;](02_principe_de_base.md)

@@ -42,14 +42,14 @@ CREATE INDEX index_name
 ON table_name (column1, column2, ...);
 ```
 
-Par exemple, pour créer un index sur la colonne `email` de la table `utilisateurs`, vous pouvez exécuter la requête suivante :
+Par exemple, pour créer un index sur la colonne `nom` de la table `utilisateurs`, vous pouvez exécuter la requête suivante :
 
 ```sql
 CREATE INDEX idx_nom
 ON utilisateurs (nom);
 ```
 
-Ce code crée un index appelé `idx_nom` sur la colonne `nom` de la table `clients`. Lorsque vous exécuterez une requête qui filtre sur la colonne `nom`, la base de données utilisera cet index pour retrouver rapidement les lignes correspondantes.
+Ce code crée un index appelé `idx_nom` sur la colonne `nom` de la table `utilkisateurs`. Lorsque vous exécuterez une requête qui filtre sur la colonne `nom`, la base de données utilisera cet index pour retrouver rapidement les lignes correspondantes.
 
 Les index peuvent également être créés sur plusieurs colonnes en spécifiant les colonnes séparées par des virgules :
 

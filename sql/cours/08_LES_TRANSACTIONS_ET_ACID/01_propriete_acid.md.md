@@ -8,7 +8,7 @@ Les propriétés ACID constituent un ensemble de garanties qui sont cruciales po
 
 Avant de plonger dans les propriétés ACID, il est important de comprendre ce qu'est une transaction dans le contexte des bases de données. Une transaction est une unité de travail qui peut inclure une ou plusieurs opérations de manipulation de données, comme `INSERT`, `UPDATE`, `DELETE`, etc. Ces opérations sont exécutées de manière atomique, ce qui signifie qu'elles sont considérées comme une seule action. Une transaction doit être entièrement complétée ou, en cas d'échec, complètement annulée, laissant la base de données dans un état cohérent.
 
-## Les Propriétés ACID
+## Les propriétés ACID
 
 Le terme ACID est un acronyme pour :
 
@@ -19,19 +19,19 @@ Le terme ACID est un acronyme pour :
 
 ### 1. Atomicité
 
-L'atomicité garantit que chaque transaction est "tout ou rien". Cela signifie que toutes les opérations d'une transaction doivent être exécutées avec succès; sinon, elles doivent être complètement annulées. L'atomicité assure que même en cas de panne, de crash ou d'erreur, une transaction incomplète n'affectera pas la base de données.
+L’atomicité garantit que toutes les opérations d'une transaction sont effectuées ou annulées. C’est du "tout ou rien". Si une partie de la transaction échoue, aucune des opérations n’est appliquée.
 
-**Exemple :** Supposons que vous transfériez de l'argent de votre compte bancaire à celui d'un ami. Cette opération implique de retirer de l'argent de votre compte (`UPDATE compte SET solde = solde - 100 WHERE id = 1`) et de l'ajouter au compte de votre ami (`UPDATE compte SET solde = solde + 100 WHERE id = 2`). Si la première opération réussit mais que la seconde échoue, sans atomicité, l'argent pourrait disparaître du système. L'atomicité garantit que soit les deux opérations réussissent, soit aucune ne réussit.
+**Exemple :**  Vous transférez de l'argent d'un compte à un autre. Si l'argent est retiré du premier compte, mais que le dépôt échoue, alors l'opération est annulée et aucun argent n’est perdu.
 
 ### 2. Cohérence
 
-La cohérence assure que chaque transaction, lorsqu'elle est exécutée, transforme la base de données d'un état valide à un autre état valide, en respectant toutes les règles et contraintes définies (comme les contraintes d'intégrité référentielle, les règles de validation de données, etc.). La cohérence empêche la base de données de se retrouver dans un état invalide après une transaction.
+La cohérence assure que la base de données passe d’un état valide à un autre. Les règles de la base de données (comme "pas de solde négatif") doivent toujours être respectées, même après une transaction.
 
-**Exemple :** Si une règle de votre base de données stipule qu'un compte bancaire ne peut pas avoir un solde négatif, alors une transaction qui essaierait de retirer plus d'argent qu'il n'y en a dans le compte serait annulée pour préserver la cohérence.
+**Exemple :** Si une règle dit qu'un compte ne peut pas avoir un solde négatif, une transaction qui essaie de retirer trop d’argent sera annulée.
 
 ### 3. Isolation
 
-L'isolation garantit que les transactions concurrentes s'exécutent de manière indépendante sans interférer les unes avec les autres. Le niveau d'isolation peut varier, mais l'idée principale est qu'une transaction en cours ne peut pas voir ou affecter les modifications effectuées par une autre transaction non terminée.
+L'isolation garantit que les transactions qui se produisent en même temps n’interfèrent pas les unes avec les autres. Cela signifie qu'une transaction en cours ne peut pas voir ou utiliser les modifications d'une autre transaction tant qu'elle n'est pas terminée.
 
 Les SGBDR offrent différents niveaux d'isolation, tels que :
 
@@ -40,15 +40,15 @@ Les SGBDR offrent différents niveaux d'isolation, tels que :
 - **Repeatable Read** : Les valeurs lues par une transaction restent les mêmes pendant toute sa durée.
 - **Serializable** : Les transactions sont entièrement isolées les unes des autres, garantissant l'exactitude et la cohérence.
 
-**Exemple :** Si deux utilisateurs tentent simultanément de mettre à jour le même enregistrement, l'isolation empêche leurs transactions de se mêler, évitant ainsi les résultats incohérents.
+**Exemple :** Si deux utilisateurs essaient de réserver la même place de cinéma en même temps, l’isolation évite les conflits en s'assurant que les réservations se passent l'une après l'autre.
 
 ### 4. Durabilité
 
-La durabilité garantit que, une fois qu'une transaction est validée (committed), ses effets sont permanents et survivront à toute panne système ou d'alimentation. Cela signifie que les modifications apportées à la base de données par une transaction validée sont écrites sur un support de stockage permanent (comme un disque dur), rendant les données résistantes aux pertes.
+La durabilité garantit que, une fois qu'une transaction est validée, ses effets sont permanents. Même en cas de panne ou de coupure de courant, les changements sont enregistrés de façon sécurisée.
 
-**Exemple :** Après avoir validé une transaction de virement bancaire, même en cas de panne de courant ou de crash du serveur juste après la validation, le transfert d'argent reste effectué et enregistré dans la base de données.
+**Exemple :** Après avoir validé une commande dans une boutique en ligne, même si le site plante juste après, la commande reste enregistrée.
 
-## Pourquoi les Propriétés ACID sont-elles Cruciales ?
+## Pourquoi ACID est Important ?
 
 Les propriétés ACID sont essentielles pour maintenir l'intégrité et la fiabilité des bases de données, surtout dans les systèmes critiques où les erreurs peuvent entraîner des conséquences graves, telles que dans les systèmes bancaires, les systèmes de réservation ou les systèmes de gestion de la chaîne d'approvisionnement. Sans ces garanties, les données pourraient devenir corrompues, incohérentes, ou même être perdues, ce qui pourrait nuire gravement à la fiabilité des systèmes qui en dépendent.
 

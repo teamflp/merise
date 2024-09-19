@@ -118,7 +118,9 @@ Cette fonction retourne un nombre entier qui représente le nombre de jours entr
 Calculer la différence en jours entre la date de commande et la date de livraison prévue.
 
 ```sql
-SELECT DATEDIFF(date_livraison, date_commande) AS jours_livraison
+SELECT 
+    DATEDIFF(date_livraison, date_commande) 
+AS jours_livraison
 FROM commandes;
 ```
 
@@ -196,7 +198,7 @@ On déduit que la date de livraison soit le 14 août 2024. La fonction `DATE_SUB
 
 ### Conclusion
 
-La manipulation des dates en SQL est une compétence essentielle pour tout utilisateur de base de données. En utilisant des fonctions comme `NOW()`, `DATE_FORMAT`, et `DATEDIFF`, vous pouvez formater, calculer, et comparer des valeurs de date de manière efficace. Ces outils sont particulièrement utiles pour la gestion des transactions, le reporting, et l'analyse des données temporelles.
+La manipulation des dates en SQL est une compétence essentielle pour tout utilisateur de base de données. En utilisant des fonctions comme `NOW()`, `DATE_FORMAT`, `DATE_ADD` et `DATEDIFF`, vous pouvez formater, calculer, et comparer des valeurs de date de manière efficace. Ces outils sont particulièrement utiles pour la gestion des transactions, le reporting, et l'analyse des données temporelles.
 
 N'hésitez pas à expérimenter ces fonctions avec vos propres données pour vous familiariser davantage avec leur utilisation.
 

@@ -11,7 +11,10 @@ La syntaxe de base pour supprimer un objet est la suivante :
 ### Supprimer une table
 
 ```sql
-DROP TABLE nom_de_la_table;
+DROP TABLE utilisateur;
+DROP DATABASE myDB;
+DROP INDEX idx_email ON utilisateur;
+DROP VIEW vue_utilisateur;
 ```
 ## 2. Supprimer un index
 

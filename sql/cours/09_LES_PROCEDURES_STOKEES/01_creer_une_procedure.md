@@ -19,7 +19,7 @@ END;
 
 Supposons que nous voulons créer une procédure pour insérer un nouvel enregistrement dans table `employes`
 
-Au préalable, nous devons avoir une table `employes`. Pour cela, nous pouvons créer une procédure stockée `createTable` pour créer la table `employes` :
+Au préalable, nous devons avoir une base de données `membres` pour créer la procédure stockée.:
 
 On sélectionne la base de données dans laquelle on veut créer la procédure stockée :
 

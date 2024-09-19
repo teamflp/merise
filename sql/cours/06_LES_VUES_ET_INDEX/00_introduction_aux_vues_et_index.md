@@ -6,6 +6,8 @@ Une vue en SQL est une table virtuelle qui permet de présenter des données iss
 
 En d'autres termes, une vue est une requête SQL pré-définie et nommée que l'on peut appeler comme si c'était une table. Cela permet de simplifier les accès aux données, de masquer la complexité des requêtes sous-jacentes, et d'offrir une couche d'abstraction pour une manipulation plus simple et plus sécurisée des données.
 
+Les vues et les indexes sont deux concepts clés en SQL qui permettent d'optimiser les performances des requêtes et de simplifier la manipulation des données. Les vues sont des tables virtuelles qui encapsulent des requêtes SQL complexes, tandis que les indexes sont des structures de données qui accélèrent la recherche et la récupération des données dans une table.
+
 #### 2. Pourquoi utiliser des Vues ?
 
 Il y a plusieurs raisons pour lesquelles les vues sont largement utilisées dans les systèmes de bases de données relationnelles :

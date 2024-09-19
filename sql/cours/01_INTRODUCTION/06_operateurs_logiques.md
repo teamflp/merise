@@ -1,6 +1,6 @@
 ### Opérateurs logiques
 
-Les opérateurs logiques permettent de combiner plusieurs conditions pour obtenir un résultat. Il existe trois opérateurs logiques en SQL :
+Les opérateurs logiques permettent de combiner plusieurs conditions pour obtenir un résultat. Il existe plusieurs opérateurs logiques couramment utilisés en SQL, tels que `AND`, `OR`, `NOT`, `IN`, `BETWEEN`, `LIKE`, `IS NULL`, `IS NOT NULL`, `EXISTS`, `ALL`, `ANY`, `SOME`, `UNIQUE`, `EXCEPT` et `INTERSECT`.:
 
 1. **`AND`** : L'opérateur `AND` renvoie `TRUE` si toutes les conditions sont vraies.
 2. **`OR`** : L'opérateur `OR` renvoie `TRUE` si au moins l'une des conditions est vraie.

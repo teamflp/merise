@@ -95,11 +95,11 @@ INNER JOIN commandes
 ON utilisateurs.id = commandes.client_id;
 ```
 
-| nom           | produit |
-|---------------|---------|
-| Alice Dupont  | TV      |
-| Bob Martin    | Laptop  |
-| Alice Dupont  | Phone   |
+| nom                        | produit                     |
+|----------------------------|-----------------------------|
+| Alice Dupont               | TV                          |
+| Bob Martin                 | Laptop                      |
+| Alice Dupont               | Phone                       |
 
 Dans cet exemple, nous avons joint les tables **utilisateurs** et **commandes** sur la colonne `id` de la table **utilisateurs** et la colonne `client_id` de la table **commandes**. Nous avons sélectionné les colonnes `nom` de la table **utilisateurs** et `produit` de la table **commandes**.
 

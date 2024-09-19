@@ -49,9 +49,13 @@ END IF;
 END;
 ```
 
+Dans cet exemple, le trigger `avant_insertion_employe` vérifie que le prénom, le nom et le salaire de l'employé à insérer ne sont pas nuls et que le salaire n'est pas négatif. Si l'une de ces conditions n'est pas remplie, une erreur est levée (`RAISE_APPLICATION_ERROR`) et l'insertion est annulée.
+
 ### **Utilisation des Pseudorecords :** `NEW` et `OLD`
 
 Dans un trigger `BEFORE INSERT`, vous avez accès à un pseudorecord spécial nommé `NEW`. Ce pseudorecord représente la nouvelle ligne de données qui sera insérée dans la table. Vous pouvez lire et modifier les valeurs des colonnes via `NEW`.
+
+- Le pseudorecord `NEW` est un enregistrement virtuel qui contient les valeurs des colonnes de la nouvelle ligne à insérer.
 
 Voici un exemple simple de trigger `BEFORE INSERT` qui met à jour la date de création d'une ligne avant son insertion :
 
@@ -86,3 +90,4 @@ END;
 Dans cet exemple, le trigger `verif_salaire` vérifie que le salaire de l'employé à insérer n'est pas négatif. S'il l'est, une erreur est levée (`RAISE_APPLICATION_ERROR`) et l'insertion est annulée.
 
 Utilisation des pseudorecords `NEW` et `OLD` en SQL
+
