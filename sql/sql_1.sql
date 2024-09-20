@@ -286,8 +286,24 @@ SELECT LEFT(NOM, 5) FROM stagiaires; -- affiche les 4 premiers caractères des n
 
 SELECT RIGHT(prenom, 3) FROM stagiaires; -- affiche les 3 derniers caractères des prénoms des stagiaires
 
+-- On va récupérer les 5 premiers caractères des noms des stagiaires, la longueur des prénoms, la concaténation des noms et prénoms des stagiaires, les 3 premiers caractères des emails, les 3 premiers caractères des numéros de téléphone masqués, le statut des stagiaires (majeur ou mineur) et les notes des stagiaires.
 -- SUBSTRING(), REPLACE() et LENGTH()
-SELECT s.nom, s.prenom, s.age, SUBSTRING(REPLACE(TRIM(s.nom), 'a', 'A'), 1, 5) AS nomMod, LENGTH(TRIM(s.prenom)) AS L_prenom, CONCAT(TRIM(s.nom), ' ', TRIM(s.prenom)) AS NomprenConcat, LEFT(s.email, 3) AS EmailDebut, CONCAT(LEFT(s.telephone, 3), REPEAT('*', 4), RIGHT(s.telephone, LENGTH(s.telephone) - 7)) AS TelMasque, CASE WHEN s.age >= 18 THEN 'Majeur' ELSE 'Mineur' END AS Statut, n.note FROM stagiaires s INNER JOIN notes n ON s.id = n.id_stagiaire;
+SELECT s.nom, s.prenom, s.age, SUBSTRING(REPLACE(TRIM(s.nom), 'a', 'A'), 1, 5)
+    AS nomMod, LENGTH(TRIM(s.prenom))
+    AS L_prenom, CONCAT(TRIM(s.nom), ' ', TRIM(s.prenom))
+    AS NomprenConcat, LEFT(s.email, 3)
+    AS EmailDebut,
+    CONCAT(LEFT(s.telephone, 3), REPEAT('*', 4), RIGHT(s.telephone, LENGTH(s.telephone) - 7))
+    AS TelMasque,
+CASE WHEN s.age >= 18
+    THEN 'Majeur'
+    ELSE 'Mineur'
+END
+    AS Statut, n.note
+FROM stagiaires s
+INNER JOIN notes n
+ON s.id = n.id_stagiaire;
+
 
 
 -- LA FONCTION REVERSE() : permet de renverser une chaine de caractères et accepte un seul argument qui est une chaine de caractères.
@@ -349,7 +365,14 @@ SELECT * FROM commandes;
 
 SELECT * FROM users;
 
-SELECT nom, prenom, montant, DATE_FORMAT(date_commande, '(%d-%m-%Y)') AS Commandé_le FROM users INNER JOIN commandes ON users.id = commandes.id_user;
+--
+SELECT nom, prenom, montant, DATE_FORMAT(date_commande, '(%d-%m-%Y)')
+    AS Commandé_le
+FROM users
+INNER JOIN commandes
+ON users.id = commandes.id_user;
+
+-- Cette
 
 -- LA FONCTION STR_TO_DATE() : permet de convertir une chaine de caractères en date
 SELECT STR_TO_DATE('30/07/2024', '%d/%m/%Y') AS date; -- affiche 2024-07-30
@@ -425,10 +448,18 @@ SELECT * FROM compte;
 -- TRANSACTION
 
 -- démarre la transaction
--- START TRANSACTION;
+START TRANSACTION;
+    UPDATE compte SET montant = montant - 200 WHERE id_transaction = 1;
+    UPDATE compte SET montant = montant + 200 WHERE id_transaction = 2;
+-- valider la transaction
 
--- UPDATE compte SET montant = montant - 200 WHERE id_transaction = 1;
--- UPDATE compte SET montant = montant + 200 WHERE id_transaction = 2;
+COMMIT;
+
+-- Supprimer la transaction en cas d'annulation
+ROLLBACK;
+
+-- Supprimer la base de données
+DROP DATABASE compte_bancaire;
 
 --- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ --
 

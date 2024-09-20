@@ -1,9 +1,8 @@
 # TRANSACTION ET VERROUILLAGES
 
-Les transactions et vérrouillages Sont des concepts en gestion de base de données, pour assurer la cohérence des données dans un environnement où plusieurs utilisateurs ou processus peuvent accéder nsimultanément à la meme base de données.
-
+Les transactions et les verrouillages sont des concepts clés en gestion de base de données. Ils assurent la cohérence des données dans un environnement où plusieurs utilisateurs ou processus peuvent accéder simultanément à la même base de données.
 ## TRANSACTIONS 
-Une transaction un ensemble d'instructions SQL qui doivent être exécutées ensemble ou pas du tout.
+Une transaction est un ensemble d'instructions SQL qui doivent être exécutées ensemble ou pas du tout. Elle permet d'assurer que les opérations sur les données sont atomiques, cohérentes, isolées et durables, d'où le terme `ACID` pour désigner ces propriétés.
 
 ### Propriétés ACID
 Une transaction possède 4 proprités appelées `ACID` :
@@ -13,7 +12,11 @@ Une transaction possède 4 proprités appelées `ACID` :
  3. `Isolation` : une transaction doit être isolée des autres transactions.
  4. `Durabilité` : une transaction doit être durable, c'est-à-dire que les modifications apportées par une transaction doivent être persistantes.
 
-### Création d'une base de données `compte_bancaire` et de deux tables `transactions` et `compte` :
+### Exemple pratique avec SQL
+
+1. Création d'une base de données `compte_bancaire` et de deux tables `transactions` et `compte` :
+
+Exemple pratique avec SQL
 
 ```sql
 CREATE DATABASE compte_bancaire; -- Création de la base de données
@@ -25,6 +28,13 @@ USE compte_bancaire; -- Utilisation de la base de données
 Création des tables `transactions` et `compte` :
 ```sql
 
+-- Création de la base de données
+CREATE DATABASE compte_bancaire; 
+
+-- Utilisation de la base de données
+USE compte_bancaire;
+
+-- Création de la table transactions
 CREATE TABLE transactions (
     id INT AUTO_INCREMENT,
     nom VARCHAR(100) NOT NULL,
@@ -33,6 +43,7 @@ CREATE TABLE transactions (
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- Création de la table compte
 CREATE TABLE compte (
     id INT AUTO_INCREMENT,
     id_transaction INT,
@@ -40,26 +51,131 @@ CREATE TABLE compte (
     PRIMARY KEY (id),
     FOREIGN KEY (id_transaction) REFERENCES transactions(id)
 );
+
 ```
 
-Insertion des données dans les tables `transactions` et `compte` :
+2. Insertion des données dans les tables `transactions` et `compte` :
+
 ```sql
+-- Insertion de données dans la table transactions
 INSERT INTO transactions (nom, prenom, email)
 VALUES ('DelPierro', 'Alessandro', 'alessandro@gmail.com'),
        ('Meloni', 'Giorgia', 'meloni@gmail.com');
 
+-- Insertion de données dans la table compte
 INSERT INTO compte (id_transaction, montant) VALUES (1, 1000), (2, 1500);
 ```
 
-Affichage des données des tables `transactions` et `compte` :
+3. Affichage des données
+   Nous vérifions que les données ont bien été insérées dans les deux tables. `transactions` et `compte` :
+
 ```sql
+-- Affichage des données de la table transactions
 SELECT * FROM transactions;
 
+-- Affichage des données de la table compte
 SELECT * FROM compte;
 ```
-### Procédures stockées
+
+4. Exemple de transfert de fonds avec transactions
+   Nous allons créer une transaction pour transférer 200 euros du compte de DelPierro vers le compte de Meloni.
 
 Les procédures stockées sont des blocs de code SQL nommés et stockés dans la base de données. Elles peuvent être appelées et exécutées à partir d'une application ou d'une autre procédure stockée.
+
+```sql
+-- Démarrer une transaction
+START TRANSACTION;
+
+-- Débiter 200 euros du compte de DelPierro (id_transaction = 1)
+UPDATE compte SET montant = montant - 200 WHERE id_transaction = 1;
+
+-- Créditer 200 euros sur le compte de Meloni (id_transaction = 2)
+UPDATE compte SET montant = montant + 200 WHERE id_transaction = 2;
+
+-- Vérifier si le montant est suffisant pour effectuer le transfert
+SET @montant_c1 = (SELECT montant FROM compte WHERE id_transaction = 1);
+
+-- Vérification et validation de la transaction
+IF @montant_c1 >= 200 THEN
+    COMMIT; -- Valider la transaction
+ELSE
+    ROLLBACK; -- Annuler la transaction si le montant est insuffisant
+END IF;
+```
+
+5. Procédure stockée pour le transfert de fonds
+   Nous allons créer une procédure stockée pour automatiser le transfert de fonds entre deux comptes.
+
+```sql
+-- Définition du délimiteur personnalisé
+DELIMITER //
+
+-- Création de la procédure de transfert de fonds
+CREATE PROCEDURE transfertFonds(IN id_source INT, IN id_dest INT, IN mont_transf DECIMAL(10, 2))
+BEGIN
+    DECLARE montant_c2 DECIMAL(10, 2);
+
+    -- Récupérer le montant du compte source
+SELECT montant INTO montant_c2 FROM compte WHERE id_transaction = id_source;
+
+-- Vérifier si le montant est suffisant pour le transfert
+IF montant_c2 >= mont_transf THEN
+        START TRANSACTION;
+
+        -- Débiter le compte source
+UPDATE compte SET montant = montant - mont_transf WHERE id_transaction = id_source;
+
+-- Créditer le compte destination
+UPDATE compte SET montant = montant + mont_transf WHERE id_transaction = id_dest;
+
+COMMIT;
+ELSE
+        ROLLBACK;
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Solde insuffisant pour effectuer le transfert.';
+END IF;
+END //
+
+-- Réinitialiser le délimiteur
+DELIMITER ;
+```
+
+Utilisation :
+```sql
+-- Appeler la procédure pour transférer 250 euros du compte 1 au compte 2
+CALL transfertFonds(1, 2, 250);
+```
+Pour transférer des fonds d'un compte à un autre, il suffit d'appeler la procédure transfertFonds en spécifiant l'ID du compte source, l'ID du compte destination et le montant à transférer.
+
+## VERROUILLAGES
+Les verrouillages sont des mécanismes utilisés pour contrôler l'accès concurrent aux données dans une base de données. Ils empêchent les problèmes de concurrence comme les lectures incohérentes ou les modifications non désirées.
+
+### Types de verrouillages
+1. Verrouillage en lecture (Shared Lock) : Permet à plusieurs transactions de lire les données, mais empêche les transactions d'écrire sur ces données.
+2. Verrouillage en écriture (Exclusive Lock) : Empêche les autres transactions de lire ou d'écrire sur les données. 
+3. Verrouillage en écriture partagée (Update Lock) : Permet à une transaction de lire les données, mais empêche les autres transactions de lire ou d'écrire sur les données.
+
+### Niveaux d'isolation
+Les verrouillages sont associés à des niveaux d'isolation qui définissent le degré de séparation entre les transactions concurrentes :
+
+1. READ UNCOMMITTED : Permet les lectures sales, les lectures non répétables et les écritures fantômes. 
+2. READ COMMITTED : Empêche les lectures sales, mais autorise les lectures non répétables et les écritures fantômes.
+
+### Exemple de verrouillage
+Dans cet exemple, nous allons verrouiller les données du compte avec l'ID 1 en écriture.
+
+```sql
+-- Démarrer une transaction
+START TRANSACTION;
+
+-- Sélectionner et verrouiller le compte avec l'ID 1 pour empêcher toute modification par d'autres transactions
+SELECT * FROM compte WHERE id = 1 FOR UPDATE;
+
+-- Mettre à jour le montant du compte
+UPDATE compte SET montant = montant - 100 WHERE id = 1;
+
+-- Valider la transaction
+COMMIT;
+```
 
 ```sql
 DELIMITER // 
@@ -92,7 +208,7 @@ CREATE DATABASE compte_bancaire; -- Création de la base de données
 USE compte_bancaire; -- Utilisation de la base de données
 ```
 
-### 2. Création des Tables
+### 2. Création des tables
 Description :
 Ensuite, nous créons deux tables : transactions et compte. La table transactions stocke les informations sur les transactions effectuées par les clients, tandis que la table compte stocke les informations sur les comptes bancaires.
 
@@ -115,7 +231,7 @@ CREATE TABLE compte (
 );
 ```
 
-### 3. Procédure de Transfert de Fonds
+### 3. Procédure de transfert de fonds
 Description :
 Cette procédure permet de transférer des fonds d'un compte bancaire à un autre. Elle vérifie d'abord si le montant du compte source est suffisant pour le transfert, puis effectue la transaction en mettant à jour les montants des comptes source et destination.
 
@@ -156,7 +272,7 @@ Pour transférer des fonds d'un compte à un autre, il suffit d'appeler la proc�
 CALL transfertFonds(1, 2, 250); 
 ```
 
-### 4. Procédure de Vérification de Solde 
+### 4. Procédure de vérification de solde 
 
 Description :
 
@@ -189,7 +305,7 @@ Pour vérifier le solde d'un compte, il suffit d'appeler la procédure verifierS
 CALL verifierSolde(2);
 ```
 
-### 5. Procédure de Suppression de Compte
+### 5. Procédure de suppression de compte
 
 Description :
 
@@ -224,7 +340,7 @@ Pour supprimer un compte bancaire, il suffit d'appeler la procédure supprimerCo
 CALL supprimerCompte(1); 
 ```
 
-### 6. procédure non générique de création des Tables users et comment et insertion des données
+### 6. procédure non générique de création des tables users et comment et insertion des données
 
 Description :
 Cette procédure crée deux tables : users pour stocker les informations des utilisateurs, et comment pour stocker les commentaires associés à chaque utilisateur.
@@ -294,7 +410,7 @@ Utilisation :
 Pour insérer des données dans les tables users et comment, il suffit d'appeler la procédure insertData en spécifiant le nom, le prénom, l'email et le commentaire de l'utilisateur.
 
 ```sql
-CALL insertData('Dupont', 'Jean', 'jean@gmail.com', 'Ceci est un commentaire.'); 
+CALL insertData('Dupont', 'Jean', 'jean@gmail.com', 'Ceci est un commentaire.');  
 ```
 
 ### 8. Procedure générique pour insertion Multiple de Données
@@ -305,7 +421,7 @@ Cette procédure permet d'insérer plusieurs utilisateurs et leurs commentaires 
 Code :
         
 ```sql
-DELIMITER //
+DELIMITER // 
 
 CREATE PROCEDURE insertMultipleData(IN user_names TEXT, IN commentaires TEXT)
 BEGIN
@@ -350,14 +466,14 @@ Utilisation :
 
 Pour insérer des données pour plusieurs utilisateurs et leurs commentaires respectifs, il suffit d'appeler la procédure insertMultipleData en spécifiant les noms, prénoms, emails et commentaires des utilisateurs sous forme de chaînes de caractères formatées.
 
-```sql
+```sql 
 CALL insertMultipleData(
     'Dolby, Marius, dolby@gmail.com|Biden, Joe, joe@gmail.com',
     'Commentaire pour Dolby Marius|Commentaire pour Joe Biden'
 ); 
 ```
 
-### 9. Procédure pour Supprimer un Utilisateur et ses Commentaires
+### 9. Procédure pour supprimer un utilisateur et ses commentaires
 
 Description :
 
@@ -390,7 +506,7 @@ Pour supprimer un utilisateur et ses commentaires associés, il suffit d'appeler
 CALL supprimerUtilisateur(1); 
 ```
 
-### 10. Gestion des Procédures Stockées
+### 10. Gestion des procédures stockées
 
 Description :
 
@@ -425,7 +541,7 @@ Les verrouillages sont associés à des niveaux d'isolation qui définissent le 
 
 ### Exemple de Verrouillage
 
-```sql
+```sql 
 START TRANSACTION; 
 
 SELECT * FROM compte WHERE id = 1 FOR UPDATE; -- Verrouillage en écriture
@@ -455,7 +571,7 @@ Est un ensemble d'instructions SQL qui doivent être exécutées ensemble ou pas
 - Isolation : une transaction doit être isolée des autres transactions.
 - Durabilité : une transaction doit être durable, c'est-à-dire que les modifications apportées par une transact
 
-```sql
+```sql 
 CREATE DATABASE compte_bancaire;
 USE compte_bancaire;
 
@@ -502,14 +618,16 @@ UPDATE compte SET montant = montant + 200 WHERE id_transaction = 2;
 -- Vérifie si le montant est suffisant pour effectuer le transfert
 
 SET @montant_c1 = SELECT( montant FROM compte WHERE id_transaction = 1);
+
 IF @montant_c1 >= 200 THEN
--- débiter le compte de DelPierro
-UPDATE compte SET montant = montant - 200 WHERE id_transaction = 1;
--- créditer le compte de Meloni
-UPDATE compte SET montant = montant + 200 WHERE id_transaction = 2;
-COMMIT; -- valide la transaction
+    -- débiter le compte de DelPierro
+    UPDATE compte SET montant = montant - 200 WHERE id_transaction = 1;
+    -- créditer le compte de Meloni
+    UPDATE compte SET montant = montant + 200 WHERE id_transaction = 2;
+    COMMIT; -- valide la transaction
 ELSE
-ROLLBACK; -- annule la transaction
+
+    ROLLBACK; -- annule la transaction
 END IF;
 ```
 
